@@ -1,0 +1,9 @@
+TOP_DIR= /home/sec/side_channel
+
+INCLUDE= $(TOP_DIR)/include
+INCLUDE_SOURCE=
+LIBINCLUDE=$(TOP_DIR)/lib_src
+
+INCLUDE_SOURCE+=$(INCLUDE)/mem.c
+
+CFLAGS= -I. -I$(INCLUDE) -I$(LIBINCLUDE)
