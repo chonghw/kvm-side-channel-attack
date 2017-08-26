@@ -11,7 +11,7 @@ int main()
 {
 
 	//test_case1();
-	test_case2();
+	//test_case2();
 	return 0;
 }
 
@@ -82,3 +82,4 @@ void test_case2()
 	et=get_cycle();
 	printf("%d\n",(int)(et-st));
 }
+

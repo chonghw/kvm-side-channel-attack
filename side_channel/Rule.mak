@@ -1,4 +1,4 @@
-TOP_DIR= /home/sec/side_channel
+TOP_DIR= /home/sec/kvm-side-channel-attack/side_channel
 
 INCLUDE= $(TOP_DIR)/include
 INCLUDE_SOURCE=
