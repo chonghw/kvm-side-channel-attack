@@ -13,5 +13,5 @@ mkdir:
 ifeq ($(strip $(ISFOLDER)),)
 	mkdir $(RESULT_PATH)
 else 
-	echo "$(RESULT_PATH) exists."
+	@echo "$(RESULT_PATH) exists."
 endif

@@ -7,11 +7,13 @@
 void test_case1();
 void test_case2();
 
+void test_case3();
 int main()
 {
 
 	//test_case1();
 	//test_case2();
+	test_case3();
 	return 0;
 }
 
@@ -83,3 +85,69 @@ void test_case2()
 	printf("%d\n",(int)(et-st));
 }
 
+
+
+void test_case3()
+{
+
+	uint64_t st,et;
+	int i,j;
+	int over_count;
+	uint64_t avg_read_time;
+	uint64_t threshold;
+	char *s=(char*)malloc(sizeof(char)*L3_CACHE_SIZE);
+	char *tmp=(char*)malloc(sizeof(char)*CACHELINE_SIZE);
+	memset(s,0,sizeof(char)*L3_CACHE_SIZE);
+
+
+	avg_read_time=0;
+	for(i=99;i>=0;i--)
+	{
+		st=get_cycle();
+		*tmp=*(s+i);
+		et=get_cycle();
+		avg_read_time+=(et-st);
+		printf("i:%d==%lu\n",i,et-st);
+	}
+
+	avg_read_time/=100;
+
+	
+	threshold=0;
+	for(i=99;i>=0;i--)
+	{
+		clflush((s+i),64);
+		st=get_cycle();
+		*tmp=*(s+i);
+		et=get_cycle();
+		threshold+=(et-st);
+		printf("i:%d==%lu\n",i,et-st);
+	}
+
+	threshold/=10;
+
+	printf("avg:%lu thres:%lu\n",avg_read_time,threshold);
+	getc(stdin);
+
+	for(i=0;i<L3_CACHE_SIZE;i+=CACHELINE_SIZE)
+	{
+		over_count=0;
+		for(j=i;j<L3_CACHE_SIZE;j+=CACHELINE_SIZE)
+		{
+			clflush(s+i,CACHELINE_SIZE);
+
+			st=get_cycle();
+			*tmp=*(s+j);
+			et=get_cycle();
+			if((et-st)>threshold)
+			{
+				//printf("i=%d : j=%d delay:%lu\n",i,j,et-st);
+				over_count++;
+			}
+		}
+		printf("%d:%d\n",i,over_count);
+	}
+
+	free(s);
+	free(tmp);
+}
