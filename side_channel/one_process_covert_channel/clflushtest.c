@@ -1,153 +1,132 @@
 #include <stdio.h>
-#include <mem.h>
 #include <stdlib.h>
 #include <string.h>
+#include <mem.h>
+#include <tools.h>
 #define LOOP 1
+#define THRESHOLD 10000
 
-void test_case1();
-void test_case2();
+typedef struct cache_set
+{
+	int index;
+	int top;
+	size_t *cache_lines[WAY*SLICE];
+	cache_set *next;
+	cache_set *prev;
+}Cache_set;
 
-void test_case3();
+
+Cache_set* make_cache_set()
+{
+	Cache_set *head=(Cache_set*)malloc(sizeof(Cache_set));
+	head->top=0;
+	head->index=-1;
+	head->next=NULL;
+	head->prev=NULL;
+
+	return head;
+}
+
+void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr)
+{
+	Cache_set *tmp_head=head;
+	Cache_set *new_cache_set;
+	int index=make_index_set(cache_line_addr);
+
+	for(tmp_head;;tmp_head=tmp_head->next)
+	{
+		if(tmp_head->index==index)
+		{
+			if(tmp_head->top<WAY*SLICE)
+			{
+				tmp_head->cache_lines[tmp_head->top]=cache_line_addr;
+				tmp_head->top++;
+			}
+			else
+			{
+				new_cache_set=make_cache_set();
+				new_cache_set->cache_lines[new_cache_set->top]=cache_line_addr;
+				new_cache_set->top++;
+				new_cache_set->index=make_index_set(cache_line_addr);
+
+				tmp_head->next=new_cache_set;
+				new_cache_set->prev=tmp_head;
+			}
+		}
+		else
+		{
+			new_cache_set=make_cache_set();
+			new_cache_set->cache_lines[new_cache_set->top]=cache_line_addr;
+			new_cache_set->top++;
+			new_cache_set->index=make_index_set(cache_line_addr);
+
+			tmp_head->next=new_cache_set;
+			new_cache_set->prev=tmp_head;
+		}
+		if(tmp_head->next==NULL)
+		{
+			break;
+		}
+	}
+}
+
+
+int make_index_set(size_t addr)
+{
+	int left_shift=64-(INDEX_SET_SIZE+OFFSET_SIZE);
+	int right_shift=64-INDEX_SET_SIZE;
+	return (addr<<left_shift)>>right_shift;
+}
+
+
+char* make_candidate_set()
+{
+	int i,j;
+	int top=1;
+
+	char* lines=(char*)malloc(sizeof(char)*L3_CACHE_SIZE*2);
+	char** candidate=(char**)malloc(sizeof(char*)*WAY*SLICE);
+
+	size_t addr=(size_t)&lines[0];
+	int index;
+
+	index=make_index_set(addr);
+
+	candidate[0]=&lines[0];
+
+	for(i=0;i<L3_CACHE_SIZE*2;i+=CACHELINE_SIZE)
+	{
+		addr=(size_t)&lines[i];
+		if(make_index_set(addr)==index)
+		{
+			candidate[top]=&lines[i];
+			top++;
+			if(top==20*12)
+			{
+				break;
+			}
+		}
+	}
+
+	for(i=0;i<top;i++)
+	{
+		addr=(size_t)&(*candidate[i]);
+		index=make_index_set(addr);
+		printf("%d    index:%d    addr:%lu(",i,index,addr);
+		binary_print(addr,64); printf(")\n");
+
+	}
+
+	return NULL;
+}
+
+
+
 int main()
 {
-
-	//test_case1();
-	//test_case2();
-	test_case3();
+	make_candidate_set();
 	return 0;
 }
 
 
 
-void test_case1()
-{
-	uint64_t st,et;
-	int i;
-	int sum=0;
-	sum=0;
-	char *tmp=(char*)malloc(sizeof(char)*L3_CACHE_SIZE);
-	char *s=(char*)malloc(sizeof(char)*L3_CACHE_SIZE);
-	memset(s,'a',sizeof(char)*L3_CACHE_SIZE);
-	for(i=0;i<LOOP;i++)
-	{
-		clflush(s,sizeof(char)*L3_CACHE_SIZE);
-
-
-		st=get_cycle();
-		*tmp=*s;
-		et=get_cycle();
-		sum+=et-st;
-	}
-	sum/=LOOP;
-	printf("avg1=%d\n",sum);
-
-
-	sum=0;
-	for(i=0;i<LOOP;i++)
-	{
-		st=get_cycle();
-		*tmp=*s;
-		et=get_cycle();
-		sum+=et-st;
-	}
-	sum/=LOOP;
-	printf("avg2=%d\n",sum);
-}
-
-
-void test_case2()
-{
-	uint64_t st,et;
-	int i;
-	char *s=(char*)malloc(sizeof(char)*64*2);
-	char *tmp=(char*)malloc(sizeof(char)*64);
-	memset(s,'a',sizeof(char)*64*2);
-
-	st=get_cycle();
-	*tmp=*s;
-	et=get_cycle();
-	printf("befor:%d ",(int)(et-st));
-
-	st=get_cycle();
-	*tmp=*(s+64);
-	et=get_cycle();
-	printf("%d\n",(int)(et-st));
-
-	clflush(s,64);
-	st=get_cycle();
-	*tmp=*s;
-	et=get_cycle();
-	printf("after:%d ",(int)(et-st));
-
-	st=get_cycle();
-	*tmp=*(s+64);
-	et=get_cycle();
-	printf("%d\n",(int)(et-st));
-}
-
-
-
-void test_case3()
-{
-
-	uint64_t st,et;
-	int i,j;
-	int over_count;
-	uint64_t avg_read_time;
-	uint64_t threshold;
-	char *s=(char*)malloc(sizeof(char)*L3_CACHE_SIZE);
-	char *tmp=(char*)malloc(sizeof(char)*CACHELINE_SIZE);
-	memset(s,0,sizeof(char)*L3_CACHE_SIZE);
-
-
-	avg_read_time=0;
-	for(i=99;i>=0;i--)
-	{
-		st=get_cycle();
-		*tmp=*(s+i);
-		et=get_cycle();
-		avg_read_time+=(et-st);
-		printf("i:%d==%lu\n",i,et-st);
-	}
-
-	avg_read_time/=100;
-
-	
-	threshold=0;
-	for(i=99;i>=0;i--)
-	{
-		clflush((s+i),64);
-		st=get_cycle();
-		*tmp=*(s+i);
-		et=get_cycle();
-		threshold+=(et-st);
-		printf("i:%d==%lu\n",i,et-st);
-	}
-
-	threshold/=10;
-
-	printf("avg:%lu thres:%lu\n",avg_read_time,threshold);
-	getc(stdin);
-
-	for(i=0;i<L3_CACHE_SIZE;i+=CACHELINE_SIZE)
-	{
-		over_count=0;
-		for(j=i;j<L3_CACHE_SIZE;j+=CACHELINE_SIZE)
-		{
-			clflush(s+i,CACHELINE_SIZE);
-
-			st=get_cycle();
-			*tmp=*(s+j);
-			et=get_cycle();
-			if((et-st)>threshold)
-			{
-				//printf("i=%d : j=%d delay:%lu\n",i,j,et-st);
-				over_count++;
-			}
-		}
-		printf("%d:%d\n",i,over_count);
-	}
-
-	free(s);
-	free(tmp);
-}

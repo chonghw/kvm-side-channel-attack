@@ -5,36 +5,50 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ADDRESS	multi_process_covert_channel/receiver.c	4;"	d	file:
-CACHELINE_SIZE	include/mem.h	5;"	d
+CACHELINE_SIZE	include/mem.h	2;"	d
 CC	multi_process_covert_channel/makefile	/^CC=gcc$/;"	m
 CFLAGS	Rule.mak	/^CFLAGS= -I. -I$(INCLUDE) -I$(LIBINCLUDE)$/;"	m
 CP	one_process_covert_channel/makefile	/^CP=g++$/;"	m
+Cache_set	one_process_covert_channel/clflushtest.c	/^}Cache_set;$/;"	t	typeref:struct:cache_set	file:
 DIR	makefile	/^DIR= one_process_covert_channel multi_process_covert_channel$/;"	m
 DIR	test/makefile	/^DIR=src1 src2$/;"	m
 INCLUDE	Rule.mak	/^INCLUDE= $(TOP_DIR)\/include$/;"	m
 INCLUDE_SOURCE	Rule.mak	/^INCLUDE_SOURCE=$/;"	m
+INDEX_SET_SIZE	include/mem.h	5;"	d
 ISFOLDER	multi_process_covert_channel/makefile	/^ISFOLDER=$(wildcard $(RESULT_PATH))$/;"	m
 ISFOLDER	one_process_covert_channel/makefile	/^ISFOLDER=$(wildcard $(RESULT_PATH))$/;"	m
-L3_CACHE_SIZE	include/mem.h	4;"	d
+L3_CACHE_SIZE	include/mem.h	1;"	d
 LIBINCLUDE	Rule.mak	/^LIBINCLUDE=$(TOP_DIR)\/lib_src$/;"	m
-LOOP	one_process_covert_channel/clflushtest.c	5;"	d	file:
+LOOP	one_process_covert_channel/clflushtest.c	6;"	d	file:
 MAIN_SOURCE	multi_process_covert_channel/makefile	/^MAIN_SOURCE=sender receiver$/;"	m
 MAIN_SOURCE	one_process_covert_channel/makefile	/^MAIN_SOURCE=clflushtest.c$/;"	m
+OFFSET_SIZE	include/mem.h	6;"	d
 RESULT_PATH	multi_process_covert_channel/makefile	/^RESULT_PATH=.\/result$/;"	m
 RESULT_PATH	one_process_covert_channel/makefile	/^RESULT_PATH=.\/result$/;"	m
+SLICE	include/mem.h	4;"	d
 T	test/makefile	/^T=$(wildcard .\/src1)$/;"	m
+THRESHOLD	one_process_covert_channel/clflushtest.c	7;"	d	file:
 TIMESLOT	multi_process_covert_channel/sender.c	6;"	d	file:
 TOP_DIR	Rule.mak	/^TOP_DIR= \/home\/sec\/kvm-side-channel-attack\/side_channel$/;"	m
+WAY	include/mem.h	3;"	d
 address	multi_process_covert_channel/receiver.c	/^	ADDRESS address;$/;"	m	struct:candidate	file:
+binary_print	include/tools.c	/^void binary_print(size_t addr,int size)$/;"	f
+cache_line_to_cadidate	one_process_covert_channel/clflushtest.c	/^void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr)$/;"	f
+cache_lines	one_process_covert_channel/clflushtest.c	/^	size_t *cache_lines[WAY*SLICE];$/;"	m	struct:cache_set	file:
+cache_set	one_process_covert_channel/clflushtest.c	/^typedef struct cache_set$/;"	s	file:
 candidate	multi_process_covert_channel/receiver.c	/^typedef struct candidate$/;"	s	file:
 candidate	multi_process_covert_channel/receiver.c	/^}candidate;$/;"	t	typeref:struct:candidate	file:
-clflush	include/mem.c	/^void clflush(volatile void *p,int size)$/;"	f
-get_cycle	include/mem.c	/^uint64_t get_cycle()$/;"	f
+clflush	include/tools.c	/^void clflush(volatile void *p,int size)$/;"	f
+get_cycle	include/tools.c	/^uint64_t get_cycle()$/;"	f
+index	one_process_covert_channel/clflushtest.c	/^	int index;$/;"	m	struct:cache_set	file:
 main	multi_process_covert_channel/receiver.c	/^int main(int argc,char* argv[])$/;"	f
 main	multi_process_covert_channel/sender.c	/^int main(int argc, char* argv[])$/;"	f
 main	one_process_covert_channel/clflushtest.c	/^int main()$/;"	f
+make_cache_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_cache_set()$/;"	f
+make_candidate_set	one_process_covert_channel/clflushtest.c	/^char* make_candidate_set()$/;"	f
+make_index_set	one_process_covert_channel/clflushtest.c	/^int make_index_set(size_t addr)$/;"	f
+next	one_process_covert_channel/clflushtest.c	/^	cache_set *next;$/;"	m	struct:cache_set	file:
 now_time	multi_process_covert_channel/receiver.c	/^	uint64_t now_time;$/;"	m	struct:candidate	file:
+prev	one_process_covert_channel/clflushtest.c	/^	cache_set *prev;$/;"	m	struct:cache_set	file:
 prev_time	multi_process_covert_channel/receiver.c	/^	uint64_t prev_time;$/;"	m	struct:candidate	file:
-test_case1	one_process_covert_channel/clflushtest.c	/^void test_case1()$/;"	f
-test_case2	one_process_covert_channel/clflushtest.c	/^void test_case2()$/;"	f
-test_case3	one_process_covert_channel/clflushtest.c	/^void test_case3()$/;"	f
+top	one_process_covert_channel/clflushtest.c	/^	int top;$/;"	m	struct:cache_set	file:
