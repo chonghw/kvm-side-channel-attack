@@ -1,0 +1,5 @@
+00000001011
+0000001011
+0000001011
+Average of Error rate : 0.333
+Standard deviation : 0.471

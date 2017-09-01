@@ -4,51 +4,705 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADDR	prev-side/160922_attack/base.h	/^	uint64_t *ADDR;$/;"	m	struct:memory
+ADDR	prev-side/160924_attack/base.h	/^	uint64_t *ADDR;$/;"	m	struct:memory
+ADDR	prev-side/160925_attack/base.h	/^	uint64_t *ADDR;$/;"	m	struct:memory
+ADDR	prev-side/160926_attack/base.h	/^	uint64_t *ADDR;$/;"	m	struct:memory
+ADDR	prev-side/copy_sm/base.h	/^	uint64_t *ADDR;$/;"	m	struct:memory
+ADDR	prev-side/hoon_covert/base.h	/^	uint64_t *ADDR;$/;"	m	struct:memory
 ADDRESS	multi_process_covert_channel/receiver.c	4;"	d	file:
+BASE_CACHE_INDEX	prev-side/160922_attack/base.c	/^size_t BASE_CACHE_INDEX = 0;$/;"	v
+BASE_CACHE_SET_INDEX	prev-side/copy_sm/attack.c	/^size_t BASE_CACHE_SET_INDEX = 0, N_CACHE_SETS = 1;$/;"	v
+BASE_CACHE_SET_INDEX	prev-side/hoon_covert/attack.c	/^size_t BASE_CACHE_SET_INDEX = 0, N_CACHE_SETS = 1;$/;"	v
+BIT16	prev-side/copy_sm/ecc.h	/^typedef unsigned short BIT16;$/;"	t
+BIT16	prev-side/hoon_covert/ecc.h	/^typedef unsigned short BIT16;$/;"	t
+BIT32	prev-side/copy_sm/ecc.h	/^typedef unsigned long BIT32;$/;"	t
+BIT32	prev-side/hoon_covert/ecc.h	/^typedef unsigned long BIT32;$/;"	t
 CACHELINE_SIZE	include/mem.h	2;"	d
+CACHE_SET_INDEX	prev-side/160909_attack/main.c	/^size_t CACHE_SET_INDEX[N_CACHE_SET_INDICES_MAX] = {0};$/;"	v
 CC	multi_process_covert_channel/makefile	/^CC=gcc$/;"	m
 CFLAGS	Rule.mak	/^CFLAGS= -I. -I$(INCLUDE) -I$(LIBINCLUDE)$/;"	m
+CONFLICT_SET	prev-side/copy_sm/attack.c	/^s_set *CONFLICT_SET[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
+CONFLICT_SET	prev-side/hoon_covert/attack.c	/^s_set *CONFLICT_SET[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
 CP	one_process_covert_channel/makefile	/^CP=g++$/;"	m
 Cache_set	one_process_covert_channel/clflushtest.c	/^}Cache_set;$/;"	t	typeref:struct:cache_set	file:
+DATA	prev-side/160925_attack/main.c	/^char DATA[2 << 15] = {0};$/;"	v
+DATA	prev-side/160926_attack/main.c	/^char DATA[2 << 15] = {0};$/;"	v
+DEBUG	prev-side/hoon_covert/rs.c	/^int DEBUG = FALSE;$/;"	v
+DEBUG_PRINT	prev-side/160922_attack/base.h	39;"	d
+DEBUG_PRINT	prev-side/160922_attack/base.h	42;"	d
+DEBUG_PRINT	prev-side/160924_attack/base.h	39;"	d
+DEBUG_PRINT	prev-side/160924_attack/base.h	42;"	d
+DEBUG_PRINT	prev-side/160925_attack/base.h	39;"	d
+DEBUG_PRINT	prev-side/160925_attack/base.h	42;"	d
+DEBUG_PRINT	prev-side/160926_attack/base.h	39;"	d
+DEBUG_PRINT	prev-side/160926_attack/base.h	42;"	d
+DEBUG_PRINT	prev-side/copy_sm/base.h	40;"	d
+DEBUG_PRINT	prev-side/copy_sm/base.h	43;"	d
+DEBUG_PRINT	prev-side/hoon_covert/base.h	40;"	d
+DEBUG_PRINT	prev-side/hoon_covert/base.h	43;"	d
+DEBUG_PRINT_LINE	prev-side/160922_attack/base.h	40;"	d
+DEBUG_PRINT_LINE	prev-side/160922_attack/base.h	43;"	d
+DEBUG_PRINT_LINE	prev-side/160924_attack/base.h	40;"	d
+DEBUG_PRINT_LINE	prev-side/160924_attack/base.h	43;"	d
+DEBUG_PRINT_LINE	prev-side/160925_attack/base.h	40;"	d
+DEBUG_PRINT_LINE	prev-side/160925_attack/base.h	43;"	d
+DEBUG_PRINT_LINE	prev-side/160926_attack/base.h	40;"	d
+DEBUG_PRINT_LINE	prev-side/160926_attack/base.h	43;"	d
+DEBUG_PRINT_LINE	prev-side/copy_sm/base.h	41;"	d
+DEBUG_PRINT_LINE	prev-side/copy_sm/base.h	44;"	d
+DEBUG_PRINT_LINE	prev-side/hoon_covert/base.h	41;"	d
+DEBUG_PRINT_LINE	prev-side/hoon_covert/base.h	44;"	d
 DIR	makefile	/^DIR= one_process_covert_channel multi_process_covert_channel$/;"	m
 DIR	test/makefile	/^DIR=src1 src2$/;"	m
+EVICTION_SETS	prev-side/160909_attack/main.c	/^s_set **EVICTION_SETS[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
+EVICTION_SETS	prev-side/160922_attack/main.c	/^s_set **EVICTION_SETS[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
+ErasureLocs	prev-side/hoon_covert/berlekamp.c	/^static int ErasureLocs[256];$/;"	v	file:
+ErrorLocs	prev-side/hoon_covert/berlekamp.c	/^static int ErrorLocs[256];$/;"	v	file:
+FALSE	prev-side/copy_sm/ecc.h	53;"	d
+FALSE	prev-side/hoon_covert/ecc.h	53;"	d
+FILE_PATH	prev-side/160909_attack/main.c	/^char FILE_PATH[256] = {0};$/;"	v
+Find_Roots	prev-side/hoon_covert/berlekamp.c	/^Find_Roots (void)$/;"	f
 INCLUDE	Rule.mak	/^INCLUDE= $(TOP_DIR)\/include$/;"	m
 INCLUDE_SOURCE	Rule.mak	/^INCLUDE_SOURCE=$/;"	m
 INDEX_SET_SIZE	include/mem.h	5;"	d
 ISFOLDER	multi_process_covert_channel/makefile	/^ISFOLDER=$(wildcard $(RESULT_PATH))$/;"	m
 ISFOLDER	one_process_covert_channel/makefile	/^ISFOLDER=$(wildcard $(RESULT_PATH))$/;"	m
+Intel_i7_4790	prev-side/160922_attack/base.h	14;"	d
+Intel_i7_4790	prev-side/160924_attack/base.h	14;"	d
+Intel_i7_4790	prev-side/160925_attack/base.h	14;"	d
+Intel_i7_4790	prev-side/160926_attack/base.h	14;"	d
+Intel_i7_4790	prev-side/copy_sm/base.h	15;"	d
+Intel_i7_4790	prev-side/hoon_covert/base.h	15;"	d
+KEY	prev-side/160909_attack/main.c	4;"	d	file:
+KEY	prev-side/160922_attack/main.c	4;"	d	file:
+KEY	prev-side/copy_sm/attack.h	6;"	d
+KEY	prev-side/hoon_covert/attack.h	6;"	d
+L3_CACHE_ASSOC	prev-side/160922_attack/base.h	22;"	d
+L3_CACHE_ASSOC	prev-side/160922_attack/base.h	29;"	d
+L3_CACHE_ASSOC	prev-side/160924_attack/base.h	22;"	d
+L3_CACHE_ASSOC	prev-side/160924_attack/base.h	29;"	d
+L3_CACHE_ASSOC	prev-side/160925_attack/base.h	22;"	d
+L3_CACHE_ASSOC	prev-side/160925_attack/base.h	29;"	d
+L3_CACHE_ASSOC	prev-side/160926_attack/base.h	22;"	d
+L3_CACHE_ASSOC	prev-side/160926_attack/base.h	29;"	d
+L3_CACHE_ASSOC	prev-side/copy_sm/base.h	23;"	d
+L3_CACHE_ASSOC	prev-side/copy_sm/base.h	30;"	d
+L3_CACHE_ASSOC	prev-side/hoon_covert/base.h	23;"	d
+L3_CACHE_ASSOC	prev-side/hoon_covert/base.h	30;"	d
+L3_CACHE_LINE_SIZE	prev-side/160922_attack/base.h	21;"	d
+L3_CACHE_LINE_SIZE	prev-side/160922_attack/base.h	28;"	d
+L3_CACHE_LINE_SIZE	prev-side/160924_attack/base.h	21;"	d
+L3_CACHE_LINE_SIZE	prev-side/160924_attack/base.h	28;"	d
+L3_CACHE_LINE_SIZE	prev-side/160925_attack/base.h	21;"	d
+L3_CACHE_LINE_SIZE	prev-side/160925_attack/base.h	28;"	d
+L3_CACHE_LINE_SIZE	prev-side/160926_attack/base.h	21;"	d
+L3_CACHE_LINE_SIZE	prev-side/160926_attack/base.h	28;"	d
+L3_CACHE_LINE_SIZE	prev-side/copy_sm/base.h	22;"	d
+L3_CACHE_LINE_SIZE	prev-side/copy_sm/base.h	29;"	d
+L3_CACHE_LINE_SIZE	prev-side/hoon_covert/base.h	22;"	d
+L3_CACHE_LINE_SIZE	prev-side/hoon_covert/base.h	29;"	d
+L3_CACHE_N_SETS	prev-side/160922_attack/base.h	24;"	d
+L3_CACHE_N_SETS	prev-side/160922_attack/base.h	31;"	d
+L3_CACHE_N_SETS	prev-side/160924_attack/base.h	24;"	d
+L3_CACHE_N_SETS	prev-side/160924_attack/base.h	31;"	d
+L3_CACHE_N_SETS	prev-side/160925_attack/base.h	24;"	d
+L3_CACHE_N_SETS	prev-side/160925_attack/base.h	31;"	d
+L3_CACHE_N_SETS	prev-side/160926_attack/base.h	24;"	d
+L3_CACHE_N_SETS	prev-side/160926_attack/base.h	31;"	d
+L3_CACHE_N_SETS	prev-side/copy_sm/base.h	25;"	d
+L3_CACHE_N_SETS	prev-side/copy_sm/base.h	32;"	d
+L3_CACHE_N_SETS	prev-side/hoon_covert/base.h	25;"	d
+L3_CACHE_N_SETS	prev-side/hoon_covert/base.h	32;"	d
+L3_CACHE_N_SLICES	prev-side/160922_attack/base.h	23;"	d
+L3_CACHE_N_SLICES	prev-side/160922_attack/base.h	30;"	d
+L3_CACHE_N_SLICES	prev-side/160924_attack/base.h	23;"	d
+L3_CACHE_N_SLICES	prev-side/160924_attack/base.h	30;"	d
+L3_CACHE_N_SLICES	prev-side/160925_attack/base.h	23;"	d
+L3_CACHE_N_SLICES	prev-side/160925_attack/base.h	30;"	d
+L3_CACHE_N_SLICES	prev-side/160926_attack/base.h	23;"	d
+L3_CACHE_N_SLICES	prev-side/160926_attack/base.h	30;"	d
+L3_CACHE_N_SLICES	prev-side/copy_sm/base.h	24;"	d
+L3_CACHE_N_SLICES	prev-side/copy_sm/base.h	31;"	d
+L3_CACHE_N_SLICES	prev-side/hoon_covert/base.h	24;"	d
+L3_CACHE_N_SLICES	prev-side/hoon_covert/base.h	31;"	d
 L3_CACHE_SIZE	include/mem.h	1;"	d
+L3_CACHE_SIZE	prev-side/160922_attack/base.h	20;"	d
+L3_CACHE_SIZE	prev-side/160922_attack/base.h	27;"	d
+L3_CACHE_SIZE	prev-side/160924_attack/base.h	20;"	d
+L3_CACHE_SIZE	prev-side/160924_attack/base.h	27;"	d
+L3_CACHE_SIZE	prev-side/160925_attack/base.h	20;"	d
+L3_CACHE_SIZE	prev-side/160925_attack/base.h	27;"	d
+L3_CACHE_SIZE	prev-side/160926_attack/base.h	20;"	d
+L3_CACHE_SIZE	prev-side/160926_attack/base.h	27;"	d
+L3_CACHE_SIZE	prev-side/copy_sm/base.h	21;"	d
+L3_CACHE_SIZE	prev-side/copy_sm/base.h	28;"	d
+L3_CACHE_SIZE	prev-side/hoon_covert/base.h	21;"	d
+L3_CACHE_SIZE	prev-side/hoon_covert/base.h	28;"	d
 LIBINCLUDE	Rule.mak	/^LIBINCLUDE=$(TOP_DIR)\/lib_src$/;"	m
+LINE_SIZE	prev-side/160922_attack/base.h	/^	size_t LINE_SIZE;$/;"	m	struct:memory
+LINE_SIZE	prev-side/160924_attack/base.h	/^	size_t LINE_SIZE;$/;"	m	struct:memory
+LINE_SIZE	prev-side/160925_attack/base.h	/^	size_t LINE_SIZE;$/;"	m	struct:memory
+LINE_SIZE	prev-side/160926_attack/base.h	/^	size_t LINE_SIZE;$/;"	m	struct:memory
+LINE_SIZE	prev-side/copy_sm/base.h	/^	size_t LINE_SIZE;$/;"	m	struct:memory
+LINE_SIZE	prev-side/hoon_covert/base.h	/^	size_t LINE_SIZE;$/;"	m	struct:memory
 LOOP	one_process_covert_channel/clflushtest.c	6;"	d	file:
+Lambda	prev-side/hoon_covert/berlekamp.c	/^static int Lambda[MAXDEG];$/;"	v	file:
 MAIN_SOURCE	multi_process_covert_channel/makefile	/^MAIN_SOURCE=sender receiver$/;"	m
 MAIN_SOURCE	one_process_covert_channel/makefile	/^MAIN_SOURCE=clflushtest.c$/;"	m
+MAX	prev-side/160922_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+MAX	prev-side/160924_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+MAX	prev-side/160925_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+MAX	prev-side/160926_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+MAX	prev-side/copy_sm/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+MAX	prev-side/hoon_covert/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+MAXDEG	prev-side/copy_sm/ecc.h	61;"	d
+MAXDEG	prev-side/hoon_covert/ecc.h	61;"	d
+MEMORY	prev-side/160922_attack/base.c	/^s_memory MEMORY = {0};$/;"	v
+MEMORY	prev-side/160924_attack/base.c	/^s_memory MEMORY = {0};$/;"	v
+MEMORY	prev-side/160925_attack/base.c	/^s_memory MEMORY = {0};$/;"	v
+MEMORY	prev-side/160926_attack/base.c	/^s_memory MEMORY = {0};$/;"	v
+MEMORY	prev-side/copy_sm/base.c	/^s_memory MEMORY = {0};$/;"	v
+MEMORY	prev-side/hoon_covert/base.c	/^s_memory MEMORY = {0};$/;"	v
+MODE	prev-side/160909_attack/main.c	/^int MODE = 0;$/;"	v
+MODE	prev-side/160922_attack/main.c	/^int MODE = 0;$/;"	v
+MODE	prev-side/160924_attack/main.c	/^int MODE = 0;$/;"	v
+MODE	prev-side/160925_attack/main.c	/^int MODE = 0;$/;"	v
+MODE	prev-side/160926_attack/main.c	/^int MODE = 0;$/;"	v
+MODE	prev-side/copy_sm/main.c	/^int MODE = 0;$/;"	v
+MODE	prev-side/hoon_covert/main.c	/^int MODE = 0;$/;"	v
+Modified_Berlekamp_Massey	prev-side/hoon_covert/berlekamp.c	/^Modified_Berlekamp_Massey (void)$/;"	f
+NErasures	prev-side/hoon_covert/berlekamp.c	/^static int NErasures;$/;"	v	file:
+NErrors	prev-side/hoon_covert/berlekamp.c	/^static int NErrors;$/;"	v	file:
+NPAR	prev-side/copy_sm/ecc.h	45;"	d
+NPAR	prev-side/hoon_covert/ecc.h	45;"	d
+N_BITS_LOWER	prev-side/160922_attack/base.c	337;"	d	file:
+N_BITS_LOWER	prev-side/160924_attack/base.c	348;"	d	file:
+N_BITS_LOWER	prev-side/160925_attack/base.c	346;"	d	file:
+N_BITS_LOWER	prev-side/160926_attack/base.c	346;"	d	file:
+N_BITS_LOWER	prev-side/copy_sm/base.c	350;"	d	file:
+N_BITS_LOWER	prev-side/hoon_covert/base.c	350;"	d	file:
+N_BITS_SET_INDEX	prev-side/160922_attack/base.c	336;"	d	file:
+N_BITS_SET_INDEX	prev-side/160924_attack/base.c	347;"	d	file:
+N_BITS_SET_INDEX	prev-side/160925_attack/base.c	345;"	d	file:
+N_BITS_SET_INDEX	prev-side/160926_attack/base.c	345;"	d	file:
+N_BITS_SET_INDEX	prev-side/copy_sm/base.c	349;"	d	file:
+N_BITS_SET_INDEX	prev-side/hoon_covert/base.c	349;"	d	file:
+N_CACHE_SETS	prev-side/160922_attack/base.h	/^	size_t N_CACHE_SETS;$/;"	m	struct:memory
+N_CACHE_SETS	prev-side/160924_attack/base.h	/^	size_t N_CACHE_SETS;$/;"	m	struct:memory
+N_CACHE_SETS	prev-side/160925_attack/base.h	/^	size_t N_CACHE_SETS;$/;"	m	struct:memory
+N_CACHE_SETS	prev-side/160926_attack/base.h	/^	size_t N_CACHE_SETS;$/;"	m	struct:memory
+N_CACHE_SETS	prev-side/copy_sm/attack.c	/^size_t BASE_CACHE_SET_INDEX = 0, N_CACHE_SETS = 1;$/;"	v
+N_CACHE_SETS	prev-side/copy_sm/base.h	/^	size_t N_CACHE_SETS;$/;"	m	struct:memory
+N_CACHE_SETS	prev-side/hoon_covert/attack.c	/^size_t BASE_CACHE_SET_INDEX = 0, N_CACHE_SETS = 1;$/;"	v
+N_CACHE_SETS	prev-side/hoon_covert/base.h	/^	size_t N_CACHE_SETS;$/;"	m	struct:memory
+N_CACHE_SET_INDICES	prev-side/160922_attack/base.c	/^size_t N_CACHE_SET_INDICES = 1;$/;"	v
+N_CACHE_SET_INDICES_MAX	prev-side/160922_attack/base.h	45;"	d
+N_CACHE_SET_INDICES_MAX	prev-side/160924_attack/base.h	45;"	d
+N_CACHE_SET_INDICES_MAX	prev-side/160925_attack/base.h	45;"	d
+N_CACHE_SET_INDICES_MAX	prev-side/160926_attack/base.h	45;"	d
+N_CACHE_SET_INDICES_MAX	prev-side/copy_sm/base.h	46;"	d
+N_CACHE_SET_INDICES_MAX	prev-side/hoon_covert/base.h	46;"	d
+N_DATA	prev-side/160925_attack/main.c	/^size_t N_DATA = 0;$/;"	v
+N_DATA	prev-side/160926_attack/main.c	/^size_t N_DATA = 0;$/;"	v
+N_EVICTION_SETS	prev-side/160909_attack/main.c	/^size_t N_EVICTION_SETS[N_CACHE_SET_INDICES_MAX] = {0};$/;"	v
+N_EVICTION_SETS	prev-side/160922_attack/main.c	/^size_t N_EVICTION_SETS[N_CACHE_SET_INDICES_MAX] = {0};$/;"	v
+N_PROBES	prev-side/160711-2/main.c	7;"	d	file:
+N_PROBES	prev-side/160922_attack/base.h	48;"	d
+N_PROBES	prev-side/160924_attack/base.h	48;"	d
+N_PROBES	prev-side/160925_attack/base.h	48;"	d
+N_PROBES	prev-side/160926_attack/base.h	48;"	d
+N_PROBES	prev-side/copy_sm/base.h	49;"	d
+N_PROBES	prev-side/hoon_covert/base.h	49;"	d
+N_RANDOMIZE	prev-side/160922_attack/base.c	230;"	d	file:
+N_RANDOMIZE	prev-side/160924_attack/base.c	241;"	d	file:
+N_RANDOMIZE	prev-side/160925_attack/base.c	239;"	d	file:
+N_RANDOMIZE	prev-side/160926_attack/base.c	239;"	d	file:
+N_RANDOMIZE	prev-side/copy_sm/base.c	239;"	d	file:
+N_RANDOMIZE	prev-side/hoon_covert/base.c	239;"	d	file:
+N_TIMESLOTS	prev-side/copy_sm/attack.h	16;"	d
+N_TIMESLOTS	prev-side/hoon_covert/attack.h	16;"	d
+N_TRIES	prev-side/160922_attack/base.h	47;"	d
+N_TRIES	prev-side/160924_attack/base.h	47;"	d
+N_TRIES	prev-side/160925_attack/base.h	47;"	d
+N_TRIES	prev-side/160926_attack/base.h	47;"	d
+N_TRIES	prev-side/copy_sm/base.h	48;"	d
+N_TRIES	prev-side/hoon_covert/base.h	48;"	d
 OFFSET_SIZE	include/mem.h	6;"	d
+OUTPUT	prev-side/copy_sm/attack.c	/^char OUTPUT[256] = {0};$/;"	v
+OUTPUT	prev-side/hoon_covert/attack.c	/^char OUTPUT[256] = {0};$/;"	v
+Omega	prev-side/hoon_covert/berlekamp.c	/^static int Omega[MAXDEG];$/;"	v	file:
+PPOLY	prev-side/hoon_covert/galois.c	42;"	d	file:
 RESULT_PATH	multi_process_covert_channel/makefile	/^RESULT_PATH=.\/result$/;"	m
 RESULT_PATH	one_process_covert_channel/makefile	/^RESULT_PATH=.\/result$/;"	m
+SHM_ID	prev-side/160922_attack/base.h	/^	int SHM_ID;$/;"	m	struct:memory
+SHM_ID	prev-side/160924_attack/base.h	/^	int SHM_ID;$/;"	m	struct:memory
+SHM_ID	prev-side/160925_attack/base.h	/^	int SHM_ID;$/;"	m	struct:memory
+SHM_ID	prev-side/160926_attack/base.h	/^	int SHM_ID;$/;"	m	struct:memory
+SHM_ID	prev-side/copy_sm/base.h	/^	int SHM_ID;$/;"	m	struct:memory
+SHM_ID	prev-side/hoon_covert/base.h	/^	int SHM_ID;$/;"	m	struct:memory
+SIZE	prev-side/160922_attack/base.h	/^	size_t SIZE;$/;"	m	struct:memory
+SIZE	prev-side/160924_attack/base.h	/^	size_t SIZE;$/;"	m	struct:memory
+SIZE	prev-side/160925_attack/base.h	/^	size_t SIZE;$/;"	m	struct:memory
+SIZE	prev-side/160926_attack/base.h	/^	size_t SIZE;$/;"	m	struct:memory
+SIZE	prev-side/copy_sm/base.h	/^	size_t SIZE;$/;"	m	struct:memory
+SIZE	prev-side/hoon_covert/base.h	/^	size_t SIZE;$/;"	m	struct:memory
 SLICE	include/mem.h	4;"	d
+START_ADDR	prev-side/copy_sm/attack.c	/^uint64_t *START_ADDR[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
+START_ADDR	prev-side/hoon_covert/attack.c	/^uint64_t *START_ADDR[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
 T	test/makefile	/^T=$(wildcard .\/src1)$/;"	m
 THRESHOLD	one_process_covert_channel/clflushtest.c	7;"	d	file:
+THRESHOLD	prev-side/160711-2/main.c	6;"	d	file:
+THRESHOLD	prev-side/160922_attack/base.c	/^uint64_t THRESHOLD = 0;$/;"	v
+THRESHOLD	prev-side/160924_attack/base.c	/^uint64_t THRESHOLD = 0;$/;"	v
+THRESHOLD	prev-side/160925_attack/base.c	/^uint64_t THRESHOLD = 0;$/;"	v
+THRESHOLD	prev-side/160926_attack/base.c	/^uint64_t THRESHOLD = 0;$/;"	v
+THRESHOLD	prev-side/copy_sm/base.c	/^uint64_t THRESHOLD = 0;$/;"	v
+THRESHOLD	prev-side/hoon_covert/base.c	/^uint64_t THRESHOLD = 0;$/;"	v
+THRESHOLD_RANGE	prev-side/160922_attack/base.h	46;"	d
+THRESHOLD_RANGE	prev-side/160924_attack/base.h	46;"	d
+THRESHOLD_RANGE	prev-side/160925_attack/base.h	46;"	d
+THRESHOLD_RANGE	prev-side/160926_attack/base.h	46;"	d
+THRESHOLD_RANGE	prev-side/copy_sm/base.h	47;"	d
+THRESHOLD_RANGE	prev-side/hoon_covert/base.h	47;"	d
 TIMESLOT	multi_process_covert_channel/sender.c	6;"	d	file:
 TOP_DIR	Rule.mak	/^TOP_DIR= \/home\/sec\/kvm-side-channel-attack\/side_channel$/;"	m
+TRUE	prev-side/copy_sm/ecc.h	52;"	d
+TRUE	prev-side/hoon_covert/ecc.h	52;"	d
+T_DETECT	prev-side/copy_sm/attack.h	11;"	d
+T_DETECT	prev-side/copy_sm/attack.h	13;"	d
+T_DETECT	prev-side/hoon_covert/attack.h	11;"	d
+T_DETECT	prev-side/hoon_covert/attack.h	13;"	d
+T_TIMESLOT	prev-side/copy_sm/attack.h	15;"	d
+T_TIMESLOT	prev-side/hoon_covert/attack.h	15;"	d
+VM	prev-side/copy_sm/base.h	14;"	d
+VM	prev-side/hoon_covert/base.h	14;"	d
 WAY	include/mem.h	3;"	d
+__BASE_H__	prev-side/160922_attack/base.h	2;"	d
+__BASE_H__	prev-side/160924_attack/base.h	2;"	d
+__BASE_H__	prev-side/160925_attack/base.h	2;"	d
+__BASE_H__	prev-side/160926_attack/base.h	2;"	d
+__BASE_H__	prev-side/copy_sm/base.h	2;"	d
+__BASE_H__	prev-side/hoon_covert/base.h	2;"	d
+__COVERT_CHANNEL_H__	prev-side/copy_sm/attack.h	2;"	d
+__COVERT_CHANNEL_H__	prev-side/hoon_covert/attack.h	2;"	d
+__MEMORY_H__	prev-side/160711-2/memory.h	2;"	d
+__SET_H__	prev-side/160711-2/set.h	2;"	d
+add_polys	prev-side/hoon_covert/berlekamp.c	/^void add_polys (int dst[], int src[]) $/;"	f
+addr	prev-side/160711-2/set.h	/^	void *addr;$/;"	m	struct:element
 address	multi_process_covert_channel/receiver.c	/^	ADDRESS address;$/;"	m	struct:candidate	file:
+ans	prev-side/analyze.c	/^char ans[10000];$/;"	v
+ans	prev-side/hoon_covert/analyze_tool/analyze.c	/^char ans[10000];$/;"	v
+anslen	prev-side/analyze.c	/^int cnt, sum, anslen;$/;"	v
+anslen	prev-side/hoon_covert/analyze_tool/analyze.c	/^int cnt, sum, anslen;$/;"	v
+attack	prev-side/160909_attack/main.c	/^int attack(void) {$/;"	f
+attack	prev-side/160922_attack/main.c	/^int attack(void) {$/;"	f
+avg	prev-side/analyze.c	/^int avg[1000000];$/;"	v
+avg	prev-side/hoon_covert/analyze_tool/analyze.c	/^int avg[1000000];$/;"	v
 binary_print	include/tools.c	/^void binary_print(size_t addr,int size)$/;"	f
+build_codeword	prev-side/hoon_covert/rs.c	/^build_codeword (unsigned char msg[], int nbytes, unsigned char dst[])$/;"	f
+cache	prev-side/160711-2/main.c	/^s_cache_info cache;$/;"	v
+cache	prev-side/160711-2/memory.h	/^typedef struct cache {$/;"	s
 cache_line_to_cadidate	one_process_covert_channel/clflushtest.c	/^void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr)$/;"	f
-cache_lines	one_process_covert_channel/clflushtest.c	/^	size_t *cache_lines[WAY*SLICE];$/;"	m	struct:cache_set	file:
+cache_lines	one_process_covert_channel/clflushtest.c	/^	char *cache_lines[WAY*SLICE];$/;"	m	struct:cache_set	file:
 cache_set	one_process_covert_channel/clflushtest.c	/^typedef struct cache_set$/;"	s	file:
 candidate	multi_process_covert_channel/receiver.c	/^typedef struct candidate$/;"	s	file:
 candidate	multi_process_covert_channel/receiver.c	/^}candidate;$/;"	t	typeref:struct:candidate	file:
+change_direction	prev-side/copy_sm/attack.c	/^uint64_t *change_direction(uint64_t *start, const size_t n) {$/;"	f
+change_direction	prev-side/hoon_covert/attack.c	/^uint64_t *change_direction(uint64_t *start, const size_t n) {$/;"	f
+check	prev-side/analyze.c	/^int state, check, len;$/;"	v
+check	prev-side/hoon_covert/analyze_tool/analyze.c	/^int state, check, len;$/;"	v
+check_syndrome	prev-side/hoon_covert/rs.c	/^check_syndrome (void)$/;"	f
 clflush	include/tools.c	/^void clflush(volatile void *p,int size)$/;"	f
+cnt	prev-side/analyze.c	/^int cnt, sum, anslen;$/;"	v
+cnt	prev-side/hoon_covert/analyze_tool/analyze.c	/^int cnt, sum, anslen;$/;"	v
+compare	prev-side/analyze.c	/^void compare()$/;"	f
+compare	prev-side/hoon_covert/analyze_tool/analyze.c	/^void compare()$/;"	f
+compare_cycles	prev-side/160922_attack/base.c	/^int compare_cycles(const void *first, const void *second) {$/;"	f
+compare_cycles	prev-side/160924_attack/base.c	/^int compare_cycles(const void *first, const void *second) {$/;"	f
+compare_cycles	prev-side/160925_attack/base.c	/^int compare_cycles(const void *first, const void *second) {$/;"	f
+compare_cycles	prev-side/160926_attack/base.c	/^int compare_cycles(const void *first, const void *second) {$/;"	f
+compare_cycles	prev-side/copy_sm/base.c	/^int compare_cycles(const void *first, const void *second) {$/;"	f
+compare_cycles	prev-side/hoon_covert/base.c	/^int compare_cycles(const void *first, const void *second) {$/;"	f
+compare_cycles_of_table	prev-side/160922_attack/base.c	/^int compare_cycles_of_table(const void *first, const void *second) {$/;"	f
+compare_cycles_of_table	prev-side/160924_attack/base.c	/^int compare_cycles_of_table(const void *first, const void *second) {$/;"	f
+compare_cycles_of_table	prev-side/160925_attack/base.c	/^int compare_cycles_of_table(const void *first, const void *second) {$/;"	f
+compare_cycles_of_table	prev-side/160926_attack/base.c	/^int compare_cycles_of_table(const void *first, const void *second) {$/;"	f
+compare_cycles_of_table	prev-side/copy_sm/base.c	/^int compare_cycles_of_table(const void *first, const void *second) {$/;"	f
+compare_cycles_of_table	prev-side/hoon_covert/base.c	/^int compare_cycles_of_table(const void *first, const void *second) {$/;"	f
+compute_discrepancy	prev-side/hoon_covert/berlekamp.c	/^compute_discrepancy (int lambda[], int S[], int L, int n)$/;"	f
+compute_genpoly	prev-side/hoon_covert/rs.c	/^compute_genpoly (int nbytes, int genpoly[])$/;"	f	file:
+compute_modified_omega	prev-side/hoon_covert/berlekamp.c	/^compute_modified_omega ()$/;"	f
+compute_next_omega	prev-side/hoon_covert/berlekamp.c	/^compute_next_omega (int d, int A[], int dst[], int src[])$/;"	f
+copy_poly	prev-side/hoon_covert/berlekamp.c	/^void copy_poly (int dst[], int src[]) $/;"	f
+copy_set	prev-side/160711-2/set.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+copy_set	prev-side/160922_attack/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+copy_set	prev-side/160924_attack/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+copy_set	prev-side/160925_attack/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+copy_set	prev-side/160926_attack/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+copy_set	prev-side/copy_sm/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+copy_set	prev-side/hoon_covert/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
+correct_errors_erasures	prev-side/hoon_covert/berlekamp.c	/^correct_errors_erasures (unsigned char codeword[], $/;"	f
+crc_ccitt	prev-side/hoon_covert/crcgen.c	/^BIT16 crc_ccitt(unsigned char *msg, int len)$/;"	f
+crchware	prev-side/hoon_covert/crcgen.c	/^BIT16 crchware(BIT16 data, BIT16 genpoly, BIT16 accum)$/;"	f
+create_direction	prev-side/copy_sm/attack.c	/^uint64_t *create_direction(const s_set *set) {$/;"	f
+create_direction	prev-side/hoon_covert/attack.c	/^uint64_t *create_direction(const s_set *set) {$/;"	f
+create_element	prev-side/160711-2/set.c	/^s_element *create_element(void) {$/;"	f
+create_set	prev-side/160711-2/set.c	/^s_set *create_set(void) {$/;"	f
+cycle	prev-side/160922_attack/base.h	/^	uint64_t cycle;$/;"	m	struct:table
+cycle	prev-side/160924_attack/base.h	/^	uint64_t cycle;$/;"	m	struct:table
+cycle	prev-side/160925_attack/base.h	/^	uint64_t cycle;$/;"	m	struct:table
+cycle	prev-side/160926_attack/base.h	/^	uint64_t cycle;$/;"	m	struct:table
+cycle	prev-side/copy_sm/base.h	/^	uint64_t cycle;$/;"	m	struct:table
+cycle	prev-side/hoon_covert/base.h	/^	uint64_t cycle;$/;"	m	struct:table
+data	prev-side/analyze.c	/^char data[100];$/;"	v
+data	prev-side/hoon_covert/analyze_tool/analyze.c	/^char data[10000];$/;"	v
+data_len	prev-side/analyze.c	/^int data_len;$/;"	v
+data_len	prev-side/hoon_covert/analyze_tool/analyze.c	/^int data_len;$/;"	v
+debug_check_syndrome	prev-side/hoon_covert/rs.c	/^debug_check_syndrome (void)$/;"	f
+decode_data	prev-side/hoon_covert/rs.c	/^decode_data(unsigned char data[], int nbytes)$/;"	f
+delete_element	prev-side/160711-2/set.c	/^int delete_element(s_set *set, s_element *element) {$/;"	f
+delete_element	prev-side/160922_attack/base.c	/^int delete_element(s_set *set, const uint64_t element) {$/;"	f
+delete_element	prev-side/160924_attack/base.c	/^int delete_element(s_set *set, const uint64_t element) {$/;"	f
+delete_element	prev-side/160925_attack/base.c	/^int delete_element(s_set *set, const uint64_t element) {$/;"	f
+delete_element	prev-side/160926_attack/base.c	/^int delete_element(s_set *set, const uint64_t element) {$/;"	f
+delete_element	prev-side/copy_sm/base.c	/^int delete_element(s_set *set, const uint64_t element) {$/;"	f
+delete_element	prev-side/hoon_covert/base.c	/^int delete_element(s_set *set, const uint64_t element) {$/;"	f
+delete_element_by_addr	prev-side/160711-2/set.c	/^int delete_element_by_addr(s_set *set, const void *addr) {$/;"	f
+element	prev-side/160711-2/set.h	/^typedef struct element {$/;"	s
+element	prev-side/160922_attack/base.h	/^	uint64_t element;$/;"	m	struct:table
+element	prev-side/160924_attack/base.h	/^	uint64_t element;$/;"	m	struct:table
+element	prev-side/160925_attack/base.h	/^	uint64_t element;$/;"	m	struct:table
+element	prev-side/160926_attack/base.h	/^	uint64_t element;$/;"	m	struct:table
+element	prev-side/copy_sm/base.h	/^	uint64_t element;$/;"	m	struct:table
+element	prev-side/hoon_covert/base.h	/^	uint64_t element;$/;"	m	struct:table
+elements	prev-side/160711-2/set.h	/^	s_element *elements;$/;"	m	struct:set
+elements	prev-side/160922_attack/base.h	/^	uint64_t *elements;$/;"	m	struct:set
+elements	prev-side/160924_attack/base.h	/^	uint64_t *elements;$/;"	m	struct:set
+elements	prev-side/160925_attack/base.h	/^	uint64_t *elements;$/;"	m	struct:set
+elements	prev-side/160926_attack/base.h	/^	uint64_t *elements;$/;"	m	struct:set
+elements	prev-side/copy_sm/base.h	/^	uint64_t *elements;$/;"	m	struct:set
+elements	prev-side/hoon_covert/base.h	/^	uint64_t *elements;$/;"	m	struct:set
+encode_data	prev-side/hoon_covert/rs.c	/^encode_data (unsigned char msg[], int nbytes, unsigned char dst[])$/;"	f
+eviction_set	prev-side/160711-2/main.c	/^s_set *eviction_set = NULL;$/;"	v
+finalize	prev-side/160909_attack/main.c	/^void finalize(void) {$/;"	f
+finalize	prev-side/160922_attack/main.c	/^void finalize(void) {$/;"	f
+fp	prev-side/copy_sm/attack.c	/^FILE *fp = NULL;$/;"	v
+fp	prev-side/hoon_covert/attack.c	/^FILE *fp = NULL;$/;"	v
+free_eviction_sets	prev-side/160711-2/main.c	/^int free_eviction_sets(void) {$/;"	f
+free_memory	prev-side/160922_attack/base.c	/^void free_memory(void) {$/;"	f
+free_memory	prev-side/160924_attack/base.c	/^void free_memory(void) {$/;"	f
+free_memory	prev-side/160925_attack/base.c	/^void free_memory(void) {$/;"	f
+free_memory	prev-side/160926_attack/base.c	/^void free_memory(void) {$/;"	f
+free_memory	prev-side/copy_sm/base.c	/^void free_memory(void) {$/;"	f
+free_memory	prev-side/hoon_covert/base.c	/^void free_memory(void) {$/;"	f
+free_memory_info	prev-side/160711-2/memory.c	/^int free_memory_info(s_memory_info *memory) {$/;"	f
+free_potentially_conflict_sets	prev-side/160711-2/main.c	/^int free_potentially_conflict_sets(void) {$/;"	f
+free_set	prev-side/160711-2/set.c	/^int free_set(s_set **set) {$/;"	f
+free_set	prev-side/160922_attack/base.c	/^void free_set(s_set *set) {$/;"	f
+free_set	prev-side/160924_attack/base.c	/^void free_set(s_set *set) {$/;"	f
+free_set	prev-side/160925_attack/base.c	/^void free_set(s_set *set) {$/;"	f
+free_set	prev-side/160926_attack/base.c	/^void free_set(s_set *set) {$/;"	f
+free_set	prev-side/copy_sm/base.c	/^void free_set(s_set *set) {$/;"	f
+free_set	prev-side/hoon_covert/base.c	/^void free_set(s_set *set) {$/;"	f
+free_sets	prev-side/160922_attack/base.c	/^void free_sets(s_set **sets, const size_t n) {$/;"	f
+free_sets	prev-side/160924_attack/base.c	/^void free_sets(s_set **sets, const size_t n) {$/;"	f
+free_sets	prev-side/160925_attack/base.c	/^void free_sets(s_set **sets, const size_t n) {$/;"	f
+free_sets	prev-side/160926_attack/base.c	/^void free_sets(s_set **sets, const size_t n) {$/;"	f
+free_sets	prev-side/copy_sm/base.c	/^void free_sets(s_set **sets, const size_t n) {$/;"	f
+free_sets	prev-side/hoon_covert/base.c	/^void free_sets(s_set **sets, const size_t n) {$/;"	f
+genPoly	prev-side/hoon_covert/rs.c	/^int genPoly[MAXDEG*2];$/;"	v
+get_addr	prev-side/160711-2/set.c	/^void *get_addr(const s_element *element) {$/;"	f
+get_conflict_set	prev-side/160922_attack/base.c	/^s_set *get_conflict_set(const s_set *lines) {$/;"	f
+get_conflict_set	prev-side/160924_attack/base.c	/^s_set *get_conflict_set(const s_set *lines) {$/;"	f
+get_conflict_set	prev-side/160925_attack/base.c	/^s_set *get_conflict_set(const s_set *lines) {$/;"	f
+get_conflict_set	prev-side/160926_attack/base.c	/^s_set *get_conflict_set(const s_set *lines) {$/;"	f
+get_conflict_set	prev-side/copy_sm/base.c	/^s_set *get_conflict_set(const s_set *lines) {$/;"	f
+get_conflict_set	prev-side/hoon_covert/base.c	/^s_set *get_conflict_set(const s_set *lines) {$/;"	f
 get_cycle	include/tools.c	/^uint64_t get_cycle()$/;"	f
+get_cycle	prev-side/160922_attack/base.c	/^uint64_t get_cycle(void) {$/;"	f
+get_cycle	prev-side/160924_attack/base.c	/^uint64_t get_cycle(void) {$/;"	f
+get_cycle	prev-side/160925_attack/base.c	/^uint64_t get_cycle(void) {$/;"	f
+get_cycle	prev-side/160926_attack/base.c	/^uint64_t get_cycle(void) {$/;"	f
+get_cycle	prev-side/copy_sm/base.c	/^uint64_t get_cycle(void) {$/;"	f
+get_cycle	prev-side/hoon_covert/base.c	/^uint64_t get_cycle(void) {$/;"	f
+get_cycle_in_vm	prev-side/copy_sm/attack.c	/^uint64_t get_cycle_in_vm(void) {$/;"	f
+get_cycle_in_vm	prev-side/hoon_covert/attack.c	/^uint64_t get_cycle_in_vm(void) {$/;"	f
+get_difference_set	prev-side/160922_attack/base.c	/^s_set *get_difference_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_difference_set	prev-side/160924_attack/base.c	/^s_set *get_difference_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_difference_set	prev-side/160925_attack/base.c	/^s_set *get_difference_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_difference_set	prev-side/160926_attack/base.c	/^s_set *get_difference_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_difference_set	prev-side/copy_sm/base.c	/^s_set *get_difference_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_difference_set	prev-side/hoon_covert/base.c	/^s_set *get_difference_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_element_by_addr	prev-side/160711-2/set.c	/^s_element *get_element_by_addr(const s_set *set, const void *addr) {$/;"	f
+get_element_by_idx	prev-side/160711-2/set.c	/^s_element *get_element_by_idx(const s_set *set, const size_t idx) {$/;"	f
+get_eviction_sets	prev-side/160922_attack/base.c	/^s_set **get_eviction_sets(const s_set *lines, const s_set *conflict_set, size_t *n_sets) {$/;"	f
+get_eviction_sets	prev-side/160924_attack/base.c	/^s_set **get_eviction_sets(const s_set *lines, const s_set *conflict_set, size_t *n_sets) {$/;"	f
+get_eviction_sets	prev-side/160925_attack/base.c	/^s_set **get_eviction_sets(const s_set *lines, const s_set *conflict_set, size_t *n_sets) {$/;"	f
+get_eviction_sets	prev-side/160926_attack/base.c	/^s_set **get_eviction_sets(const s_set *lines, const s_set *conflict_set, size_t *n_sets) {$/;"	f
+get_eviction_sets	prev-side/copy_sm/base.c	/^s_set **get_eviction_sets(const s_set *lines, const s_set *conflict_set, size_t *n_sets) {$/;"	f
+get_eviction_sets	prev-side/hoon_covert/base.c	/^s_set **get_eviction_sets(const s_set *lines, const s_set *conflict_set, size_t *n_sets) {$/;"	f
+get_intersection_set	prev-side/160922_attack/base.c	/^s_set *get_intersection_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_intersection_set	prev-side/160924_attack/base.c	/^s_set *get_intersection_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_intersection_set	prev-side/160925_attack/base.c	/^s_set *get_intersection_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_intersection_set	prev-side/160926_attack/base.c	/^s_set *get_intersection_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_intersection_set	prev-side/copy_sm/base.c	/^s_set *get_intersection_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_intersection_set	prev-side/hoon_covert/base.c	/^s_set *get_intersection_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_potentially_conflict_sets	prev-side/160922_attack/base.c	/^s_set **get_potentially_conflict_sets(size_t *n_sets) {$/;"	f
+get_potentially_conflict_sets	prev-side/160924_attack/base.c	/^s_set **get_potentially_conflict_sets(size_t *n_sets) {$/;"	f
+get_potentially_conflict_sets	prev-side/160925_attack/base.c	/^s_set **get_potentially_conflict_sets(size_t *n_sets) {$/;"	f
+get_potentially_conflict_sets	prev-side/160926_attack/base.c	/^s_set **get_potentially_conflict_sets(size_t *n_sets) {$/;"	f
+get_potentially_conflict_sets	prev-side/copy_sm/base.c	/^s_set **get_potentially_conflict_sets(size_t *n_sets) {$/;"	f
+get_potentially_conflict_sets	prev-side/hoon_covert/base.c	/^s_set **get_potentially_conflict_sets(size_t *n_sets) {$/;"	f
+get_union_set	prev-side/160922_attack/base.c	/^s_set *get_union_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_union_set	prev-side/160924_attack/base.c	/^s_set *get_union_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_union_set	prev-side/160925_attack/base.c	/^s_set *get_union_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_union_set	prev-side/160926_attack/base.c	/^s_set *get_union_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_union_set	prev-side/copy_sm/base.c	/^s_set *get_union_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+get_union_set	prev-side/hoon_covert/base.c	/^s_set *get_union_set(const s_set *set_A, const s_set *set_B) {$/;"	f
+getresult	prev-side/analyze.c	/^void getresult(FILE * out)$/;"	f
+getresult	prev-side/hoon_covert/analyze_tool/analyze.c	/^void getresult(FILE * out)$/;"	f
+gexp	prev-side/hoon_covert/galois.c	/^int gexp[512];$/;"	v
+ginv	prev-side/hoon_covert/galois.c	/^int ginv (int elt) $/;"	f
+glog	prev-side/hoon_covert/galois.c	/^int glog[256];$/;"	v
+gmult	prev-side/hoon_covert/galois.c	/^int gmult(int a, int b)$/;"	f
 index	one_process_covert_channel/clflushtest.c	/^	int index;$/;"	m	struct:cache_set	file:
+init_cache_info	prev-side/160711-2/memory.c	/^int init_cache_info(s_cache_info *cache) {$/;"	f
+init_eviction_set	prev-side/160711-2/main.c	/^int init_eviction_set(const size_t set_index) {$/;"	f
+init_eviction_sets	prev-side/160711-2/main.c	/^int init_eviction_sets(void) {$/;"	f
+init_exp_table	prev-side/hoon_covert/galois.c	/^init_exp_table (void)$/;"	f	file:
+init_galois_tables	prev-side/hoon_covert/galois.c	/^init_galois_tables (void)$/;"	f
+init_gamma	prev-side/hoon_covert/berlekamp.c	/^init_gamma (int gamma[])$/;"	f
+init_listener	prev-side/copy_sm/attack.c	/^int init_listener(void) {$/;"	f
+init_listener	prev-side/hoon_covert/attack.c	/^int init_listener(void) {$/;"	f
+init_memory	prev-side/160922_attack/base.c	/^int init_memory(const key_t key) {$/;"	f
+init_memory	prev-side/160924_attack/base.c	/^int init_memory(const key_t key) {$/;"	f
+init_memory	prev-side/160925_attack/base.c	/^int init_memory(const key_t key) {$/;"	f
+init_memory	prev-side/160926_attack/base.c	/^int init_memory(const key_t key) {$/;"	f
+init_memory	prev-side/copy_sm/base.c	/^int init_memory(const key_t key) {$/;"	f
+init_memory	prev-side/hoon_covert/base.c	/^int init_memory(const key_t key) {$/;"	f
+init_memory_for_child	prev-side/160924_attack/base.c	/^int init_memory_for_child(const key_t key) {$/;"	f
+init_memory_for_child	prev-side/160925_attack/base.c	/^int init_memory_for_child(const key_t key) {$/;"	f
+init_memory_for_child	prev-side/160926_attack/base.c	/^int init_memory_for_child(const key_t key) {$/;"	f
+init_memory_for_child	prev-side/copy_sm/base.c	/^int init_memory_for_child(const key_t key) {$/;"	f
+init_memory_for_child	prev-side/hoon_covert/base.c	/^int init_memory_for_child(const key_t key) {$/;"	f
+init_memory_info	prev-side/160711-2/memory.c	/^int init_memory_info(s_memory_info *memory, const s_cache_info cache) {$/;"	f
+init_potentially_conflict_sets	prev-side/160711-2/main.c	/^int init_potentially_conflict_sets(void) {$/;"	f
+init_relative_complement	prev-side/160711-2/main.c	/^int init_relative_complement(s_set *set_A, const s_set *set_B) {	\/\/ Result = A - B$/;"	f
+init_sender	prev-side/copy_sm/attack.c	/^int init_sender(void) {$/;"	f
+init_sender	prev-side/hoon_covert/attack.c	/^int init_sender(void) {$/;"	f
+init_set	prev-side/160711-2/set.c	/^int init_set(s_set *set) {$/;"	f
+init_set	prev-side/160922_attack/base.c	/^s_set *init_set(const size_t max) {$/;"	f
+init_set	prev-side/160924_attack/base.c	/^s_set *init_set(const size_t max) {$/;"	f
+init_set	prev-side/160925_attack/base.c	/^s_set *init_set(const size_t max) {$/;"	f
+init_set	prev-side/160926_attack/base.c	/^s_set *init_set(const size_t max) {$/;"	f
+init_set	prev-side/copy_sm/base.c	/^s_set *init_set(const size_t max) {$/;"	f
+init_set	prev-side/hoon_covert/base.c	/^s_set *init_set(const size_t max) {$/;"	f
+init_sets	prev-side/160922_attack/base.c	/^s_set **init_sets(const size_t n, const size_t max) {$/;"	f
+init_sets	prev-side/160924_attack/base.c	/^s_set **init_sets(const size_t n, const size_t max) {$/;"	f
+init_sets	prev-side/160925_attack/base.c	/^s_set **init_sets(const size_t n, const size_t max) {$/;"	f
+init_sets	prev-side/160926_attack/base.c	/^s_set **init_sets(const size_t n, const size_t max) {$/;"	f
+init_sets	prev-side/copy_sm/base.c	/^s_set **init_sets(const size_t n, const size_t max) {$/;"	f
+init_sets	prev-side/hoon_covert/base.c	/^s_set **init_sets(const size_t n, const size_t max) {$/;"	f
+initialize	prev-side/160909_attack/main.c	/^int initialize(void) {$/;"	f
+initialize	prev-side/160922_attack/main.c	/^int initialize(void) {$/;"	f
+initialize_ecc	prev-side/hoon_covert/rs.c	/^initialize_ecc ()$/;"	f
+input	prev-side/analyze.c	/^void input(FILE * in)$/;"	f
+input	prev-side/hoon_covert/analyze_tool/analyze.c	/^void input(FILE * in)$/;"	f
+insert_element	prev-side/160711-2/set.c	/^int insert_element(s_set *set, s_element *element) {$/;"	f
+insert_element	prev-side/160922_attack/base.c	/^int insert_element(s_set *set, const uint64_t element) {$/;"	f
+insert_element	prev-side/160924_attack/base.c	/^int insert_element(s_set *set, const uint64_t element) {$/;"	f
+insert_element	prev-side/160925_attack/base.c	/^int insert_element(s_set *set, const uint64_t element) {$/;"	f
+insert_element	prev-side/160926_attack/base.c	/^int insert_element(s_set *set, const uint64_t element) {$/;"	f
+insert_element	prev-side/copy_sm/base.c	/^int insert_element(s_set *set, const uint64_t element) {$/;"	f
+insert_element	prev-side/hoon_covert/base.c	/^int insert_element(s_set *set, const uint64_t element) {$/;"	f
+insert_element_by_addr	prev-side/160711-2/set.c	/^int insert_element_by_addr(s_set *set, const void *addr) {$/;"	f
+is_element_in_set	prev-side/160922_attack/base.c	/^int is_element_in_set(const s_set *set, const uint64_t element) {$/;"	f
+is_element_in_set	prev-side/160924_attack/base.c	/^int is_element_in_set(const s_set *set, const uint64_t element) {$/;"	f
+is_element_in_set	prev-side/160925_attack/base.c	/^int is_element_in_set(const s_set *set, const uint64_t element) {$/;"	f
+is_element_in_set	prev-side/160926_attack/base.c	/^int is_element_in_set(const s_set *set, const uint64_t element) {$/;"	f
+is_element_in_set	prev-side/copy_sm/base.c	/^int is_element_in_set(const s_set *set, const uint64_t element) {$/;"	f
+is_element_in_set	prev-side/hoon_covert/base.c	/^int is_element_in_set(const s_set *set, const uint64_t element) {$/;"	f
+key	prev-side/160711-2/memory.c	/^key_t key = 5959;$/;"	v
+len	prev-side/analyze.c	/^int state, check, len;$/;"	v
+len	prev-side/hoon_covert/analyze_tool/analyze.c	/^int state, check, len;$/;"	v
+line_size	prev-side/160711-2/memory.h	/^	size_t line_size;$/;"	m	struct:cache
+line_size	prev-side/160711-2/memory.h	/^	size_t line_size;$/;"	m	struct:memory
 main	multi_process_covert_channel/receiver.c	/^int main(int argc,char* argv[])$/;"	f
 main	multi_process_covert_channel/sender.c	/^int main(int argc, char* argv[])$/;"	f
 main	one_process_covert_channel/clflushtest.c	/^int main()$/;"	f
+main	prev-side/160711-2/main.c	/^int main(const int argc, const char *argv[]) {$/;"	f
+main	prev-side/160909_attack/main.c	/^int main(const int argc, char **argv) {$/;"	f
+main	prev-side/160922_attack/main.c	/^int main(const int argc, char **argv) {$/;"	f
+main	prev-side/160924_attack/main.c	/^int main(const int argc, char *argv[]) {$/;"	f
+main	prev-side/160925_attack/main.c	/^int main(const int argc, char *argv[]) {$/;"	f
+main	prev-side/160926_attack/main.c	/^int main(const int argc, char *argv[]) {$/;"	f
+main	prev-side/analyze.c	/^int main(int argc,char **argv)$/;"	f
+main	prev-side/copy_sm/main.c	/^int main(const int argc, char *argv[]) {$/;"	f
+main	prev-side/hoon_covert/analyze_tool/analyze.c	/^int main(int argc,char **argv)$/;"	f
+main	prev-side/hoon_covert/main.c	/^int main(const int argc, char *argv[]) {$/;"	f
 make_cache_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_cache_set()$/;"	f
 make_candidate_set	one_process_covert_channel/clflushtest.c	/^char* make_candidate_set()$/;"	f
 make_index_set	one_process_covert_channel/clflushtest.c	/^int make_index_set(size_t addr)$/;"	f
+memory	prev-side/160711-2/main.c	/^s_memory_info memory;$/;"	v
+memory	prev-side/160711-2/memory.h	/^typedef struct memory {$/;"	s
+memory	prev-side/160922_attack/base.h	/^typedef struct memory {$/;"	s
+memory	prev-side/160924_attack/base.h	/^typedef struct memory {$/;"	s
+memory	prev-side/160925_attack/base.h	/^typedef struct memory {$/;"	s
+memory	prev-side/160926_attack/base.h	/^typedef struct memory {$/;"	s
+memory	prev-side/copy_sm/base.h	/^typedef struct memory {$/;"	s
+memory	prev-side/hoon_covert/base.h	/^typedef struct memory {$/;"	s
+mul_z_poly	prev-side/hoon_covert/berlekamp.c	/^static void mul_z_poly (int src[])$/;"	f	file:
+mult_polys	prev-side/hoon_covert/berlekamp.c	/^mult_polys (int dst[], int p1[], int p2[])$/;"	f
+n_elements	prev-side/160711-2/set.h	/^	size_t n_elements;$/;"	m	struct:set
+n_elements	prev-side/160922_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+n_elements	prev-side/160924_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+n_elements	prev-side/160925_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+n_elements	prev-side/160926_attack/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+n_elements	prev-side/copy_sm/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+n_elements	prev-side/hoon_covert/base.h	/^	size_t MAX, n_elements;$/;"	m	struct:set
+n_lines	prev-side/160711-2/memory.h	/^	size_t n_lines;$/;"	m	struct:memory
+n_potentially_conflict_sets	prev-side/160711-2/main.c	/^size_t n_potentially_conflict_sets = 0;$/;"	v
+n_sets	prev-side/160711-2/memory.h	/^	size_t n_sets;$/;"	m	struct:cache
+n_ways	prev-side/160711-2/memory.h	/^	size_t n_ways;$/;"	m	struct:cache
 next	one_process_covert_channel/clflushtest.c	/^	cache_set *next;$/;"	m	struct:cache_set	file:
+next	prev-side/160711-2/set.h	/^	struct element *prev, *next;$/;"	m	struct:element	typeref:struct:element::
 now_time	multi_process_covert_channel/receiver.c	/^	uint64_t now_time;$/;"	m	struct:candidate	file:
+output	prev-side/analyze.c	/^void output(FILE * out)$/;"	f
+output	prev-side/hoon_covert/analyze_tool/analyze.c	/^void output(FILE * out)$/;"	f
+pBytes	prev-side/hoon_covert/rs.c	/^int pBytes[MAXDEG];$/;"	v
+potentially_conflict_sets	prev-side/160711-2/main.c	/^s_set **potentially_conflict_sets = NULL;$/;"	v
 prev	one_process_covert_channel/clflushtest.c	/^	cache_set *prev;$/;"	m	struct:cache_set	file:
+prev	prev-side/160711-2/set.h	/^	struct element *prev, *next;$/;"	m	struct:element	typeref:struct:element::element
 prev_time	multi_process_covert_channel/receiver.c	/^	uint64_t prev_time;$/;"	m	struct:candidate	file:
+print_cache_info	prev-side/160711-2/memory.c	/^void print_cache_info(const s_cache_info cache) {$/;"	f
+print_cache_info	prev-side/160922_attack/base.c	/^void print_cache_info(void) {$/;"	f
+print_cache_info	prev-side/160924_attack/base.c	/^void print_cache_info(void) {$/;"	f
+print_cache_info	prev-side/160925_attack/base.c	/^void print_cache_info(void) {$/;"	f
+print_cache_info	prev-side/160926_attack/base.c	/^void print_cache_info(void) {$/;"	f
+print_cache_info	prev-side/copy_sm/base.c	/^void print_cache_info(void) {$/;"	f
+print_cache_info	prev-side/hoon_covert/base.c	/^void print_cache_info(void) {$/;"	f
+print_memory_info	prev-side/160711-2/memory.c	/^void print_memory_info(const s_memory_info memory) {$/;"	f
+print_memory_info	prev-side/160922_attack/base.c	/^void print_memory_info(void) {$/;"	f
+print_memory_info	prev-side/160924_attack/base.c	/^void print_memory_info(void) {$/;"	f
+print_memory_info	prev-side/160925_attack/base.c	/^void print_memory_info(void) {$/;"	f
+print_memory_info	prev-side/160926_attack/base.c	/^void print_memory_info(void) {$/;"	f
+print_memory_info	prev-side/copy_sm/base.c	/^void print_memory_info(void) {$/;"	f
+print_memory_info	prev-side/hoon_covert/base.c	/^void print_memory_info(void) {$/;"	f
+print_parity	prev-side/hoon_covert/rs.c	/^print_parity (void)$/;"	f
+print_set	prev-side/160711-2/set.c	/^void print_set(const s_set *set, const char *str) {$/;"	f
+print_set_info	prev-side/160922_attack/base.c	/^void print_set_info(const s_set *set) {$/;"	f
+print_set_info	prev-side/160924_attack/base.c	/^void print_set_info(const s_set *set) {$/;"	f
+print_set_info	prev-side/160925_attack/base.c	/^void print_set_info(const s_set *set) {$/;"	f
+print_set_info	prev-side/160926_attack/base.c	/^void print_set_info(const s_set *set) {$/;"	f
+print_set_info	prev-side/copy_sm/base.c	/^void print_set_info(const s_set *set) {$/;"	f
+print_set_info	prev-side/hoon_covert/base.c	/^void print_set_info(const s_set *set) {$/;"	f
+print_syndrome	prev-side/hoon_covert/rs.c	/^print_syndrome (void)$/;"	f
+probe	prev-side/160711-2/main.c	/^int probe(const s_set *set, const void *candidate) {$/;"	f
+probe	prev-side/copy_sm/attack.c	/^uint64_t probe(uint64_t *start, const size_t n) {$/;"	f
+probe	prev-side/hoon_covert/attack.c	/^uint64_t probe(uint64_t *start, const size_t n) {$/;"	f
+probe_memory_line_in_set	prev-side/160922_attack/base.c	/^uint64_t probe_memory_line_in_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_in_set	prev-side/160924_attack/base.c	/^uint64_t probe_memory_line_in_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_in_set	prev-side/160925_attack/base.c	/^uint64_t probe_memory_line_in_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_in_set	prev-side/160926_attack/base.c	/^uint64_t probe_memory_line_in_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_in_set	prev-side/copy_sm/base.c	/^uint64_t probe_memory_line_in_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_in_set	prev-side/hoon_covert/base.c	/^uint64_t probe_memory_line_in_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_with_set	prev-side/160922_attack/base.c	/^uint64_t probe_memory_line_with_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_with_set	prev-side/160924_attack/base.c	/^uint64_t probe_memory_line_with_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_with_set	prev-side/160925_attack/base.c	/^uint64_t probe_memory_line_with_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_with_set	prev-side/160926_attack/base.c	/^uint64_t probe_memory_line_with_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_with_set	prev-side/copy_sm/base.c	/^uint64_t probe_memory_line_with_set(const s_set *set, const uint64_t candidate) {$/;"	f
+probe_memory_line_with_set	prev-side/hoon_covert/base.c	/^uint64_t probe_memory_line_with_set(const s_set *set, const uint64_t candidate) {$/;"	f
+process	prev-side/analyze.c	/^void process()$/;"	f
+process	prev-side/hoon_covert/analyze_tool/analyze.c	/^void process()$/;"	f
+process	prev-side/hoon_covert/analyze_tool/analyze.py	/^def process():$/;"	f
+ptr	prev-side/160711-2/memory.h	/^	void *ptr;$/;"	m	struct:memory
+randomize_elements	prev-side/160922_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f
+randomize_elements	prev-side/160924_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f
+randomize_elements	prev-side/160925_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f
+randomize_elements	prev-side/160926_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f
+randomize_elements	prev-side/copy_sm/base.c	/^int randomize_elements(s_set *set) {$/;"	f
+randomize_elements	prev-side/hoon_covert/base.c	/^int randomize_elements(s_set *set) {$/;"	f
+randomize_lines	prev-side/160711-2/main.c	/^int randomize_lines(s_set *set) {$/;"	f
+ready	prev-side/160924_attack/main.c	/^void ready(const int argc, char *argv[]) {$/;"	f
+ready	prev-side/160925_attack/main.c	/^int ready(const int argc, char *argv[]) {$/;"	f
+ready	prev-side/160926_attack/main.c	/^int ready(const int argc, char *argv[]) {$/;"	f
+ready	prev-side/copy_sm/main.c	/^int ready(const int argc, char *argv[]) {$/;"	f
+ready	prev-side/hoon_covert/main.c	/^int ready(const int argc, char *argv[]) {$/;"	f
+result	prev-side/analyze.c	/^char result[1000000], tmpc;$/;"	v
+result	prev-side/hoon_covert/analyze_tool/analyze.c	/^char result[1000000], tmpc;$/;"	v
+s_cache_info	prev-side/160711-2/memory.h	/^} s_cache_info;$/;"	t	typeref:struct:cache
+s_element	prev-side/160711-2/set.h	/^} s_element;$/;"	t	typeref:struct:element
+s_memory	prev-side/160922_attack/base.h	/^} s_memory;$/;"	t	typeref:struct:memory
+s_memory	prev-side/160924_attack/base.h	/^} s_memory;$/;"	t	typeref:struct:memory
+s_memory	prev-side/160925_attack/base.h	/^} s_memory;$/;"	t	typeref:struct:memory
+s_memory	prev-side/160926_attack/base.h	/^} s_memory;$/;"	t	typeref:struct:memory
+s_memory	prev-side/copy_sm/base.h	/^} s_memory;$/;"	t	typeref:struct:memory
+s_memory	prev-side/hoon_covert/base.h	/^} s_memory;$/;"	t	typeref:struct:memory
+s_memory_info	prev-side/160711-2/memory.h	/^} s_memory_info;$/;"	t	typeref:struct:memory
+s_set	prev-side/160711-2/set.h	/^} s_set;$/;"	t	typeref:struct:set
+s_set	prev-side/160922_attack/base.h	/^} s_set;$/;"	t	typeref:struct:set
+s_set	prev-side/160924_attack/base.h	/^} s_set;$/;"	t	typeref:struct:set
+s_set	prev-side/160925_attack/base.h	/^} s_set;$/;"	t	typeref:struct:set
+s_set	prev-side/160926_attack/base.h	/^} s_set;$/;"	t	typeref:struct:set
+s_set	prev-side/copy_sm/base.h	/^} s_set;$/;"	t	typeref:struct:set
+s_set	prev-side/hoon_covert/base.h	/^} s_set;$/;"	t	typeref:struct:set
+s_table	prev-side/160922_attack/base.h	/^} s_table;$/;"	t	typeref:struct:table
+s_table	prev-side/160924_attack/base.h	/^} s_table;$/;"	t	typeref:struct:table
+s_table	prev-side/160925_attack/base.h	/^} s_table;$/;"	t	typeref:struct:table
+s_table	prev-side/160926_attack/base.h	/^} s_table;$/;"	t	typeref:struct:table
+s_table	prev-side/copy_sm/base.h	/^} s_table;$/;"	t	typeref:struct:table
+s_table	prev-side/hoon_covert/base.h	/^} s_table;$/;"	t	typeref:struct:table
+scale_poly	prev-side/hoon_covert/berlekamp.c	/^void scale_poly (int k, int poly[]) $/;"	f
+set	prev-side/160711-2/set.h	/^typedef struct set {$/;"	s
+set	prev-side/160922_attack/base.h	/^typedef struct set {$/;"	s
+set	prev-side/160924_attack/base.h	/^typedef struct set {$/;"	s
+set	prev-side/160925_attack/base.h	/^typedef struct set {$/;"	s
+set	prev-side/160926_attack/base.h	/^typedef struct set {$/;"	s
+set	prev-side/copy_sm/base.h	/^typedef struct set {$/;"	s
+set	prev-side/hoon_covert/base.h	/^typedef struct set {$/;"	s
+set_addr	prev-side/160711-2/set.c	/^int set_addr(s_element *element, const void *addr) {$/;"	f
+shmid	prev-side/160711-2/memory.c	/^int shmid = 0;$/;"	v
+sig_handler	prev-side/160909_attack/main.c	/^void sig_handler(int sig) {$/;"	f
+sig_handler	prev-side/160922_attack/main.c	/^void sig_handler(int sig) {$/;"	f
+sig_handler	prev-side/160924_attack/main.c	/^void sig_handler(int sig) {$/;"	f
+sig_handler	prev-side/160925_attack/main.c	/^void sig_handler(int sig) {$/;"	f
+sig_handler	prev-side/160926_attack/main.c	/^void sig_handler(int sig) {$/;"	f
+sig_handler	prev-side/copy_sm/main.c	/^void sig_handler(int sig) {$/;"	f
+sig_handler	prev-side/hoon_covert/main.c	/^void sig_handler(int sig) {$/;"	f
+size	prev-side/160711-2/memory.h	/^	size_t size;$/;"	m	struct:cache
+size	prev-side/160711-2/memory.h	/^	size_t size;$/;"	m	struct:memory
+start	prev-side/160924_attack/main.c	/^int start(void) {$/;"	f
+start	prev-side/160925_attack/main.c	/^int start(void) {$/;"	f
+start	prev-side/160926_attack/main.c	/^int start(void) {$/;"	f
+start	prev-side/copy_sm/main.c	/^int start(void) {$/;"	f
+start	prev-side/hoon_covert/main.c	/^int start(void) {$/;"	f
+start_listen	prev-side/copy_sm/attack.c	/^int start_listen(void) {$/;"	f
+start_listen	prev-side/hoon_covert/attack.c	/^int start_listen(void) {$/;"	f
+start_send	prev-side/copy_sm/attack.c	/^int start_send() {$/;"	f
+start_send	prev-side/hoon_covert/attack.c	/^int start_send() {$/;"	f
+state	prev-side/analyze.c	/^int state, check, len;$/;"	v
+state	prev-side/hoon_covert/analyze_tool/analyze.c	/^int state, check, len;$/;"	v
+stop	prev-side/160924_attack/main.c	/^void stop(void) {$/;"	f
+stop	prev-side/160925_attack/main.c	/^void stop(void) {$/;"	f
+stop	prev-side/160926_attack/main.c	/^void stop(void) {$/;"	f
+stop	prev-side/copy_sm/main.c	/^void stop(void) {$/;"	f
+stop	prev-side/hoon_covert/main.c	/^void stop(void) {$/;"	f
+stop_listener	prev-side/copy_sm/attack.c	/^void stop_listener(void) {$/;"	f
+stop_listener	prev-side/hoon_covert/attack.c	/^void stop_listener(void) {$/;"	f
+stop_sender	prev-side/copy_sm/attack.c	/^void stop_sender(void) {$/;"	f
+stop_sender	prev-side/hoon_covert/attack.c	/^void stop_sender(void) {$/;"	f
+sum	prev-side/analyze.c	/^int cnt, sum, anslen;$/;"	v
+sum	prev-side/hoon_covert/analyze_tool/analyze.c	/^int cnt, sum, anslen;$/;"	v
+synBytes	prev-side/hoon_covert/rs.c	/^int synBytes[MAXDEG];$/;"	v
+table	prev-side/160922_attack/base.h	/^typedef struct table {$/;"	s
+table	prev-side/160924_attack/base.h	/^typedef struct table {$/;"	s
+table	prev-side/160925_attack/base.h	/^typedef struct table {$/;"	s
+table	prev-side/160926_attack/base.h	/^typedef struct table {$/;"	s
+table	prev-side/copy_sm/base.h	/^typedef struct table {$/;"	s
+table	prev-side/hoon_covert/base.h	/^typedef struct table {$/;"	s
+tmpc	prev-side/analyze.c	/^char result[1000000], tmpc;$/;"	v
+tmpc	prev-side/hoon_covert/analyze_tool/analyze.c	/^char result[1000000], tmpc;$/;"	v
 top	one_process_covert_channel/clflushtest.c	/^	int top;$/;"	m	struct:cache_set	file:
+zero_fill_from	prev-side/hoon_covert/rs.c	/^zero_fill_from (unsigned char buf[], int from, int to)$/;"	f
+zero_poly	prev-side/hoon_covert/berlekamp.c	/^void zero_poly (int poly[]) $/;"	f
