@@ -2,5 +2,5 @@
 #define CACHELINE_SIZE 64 
 #define WAY 20
 #define SLICE 12
-#define INDEX_SET_SIZE 11
-#define OFFSET_SIZE 6
+#define INDEX_SET_BIT 11
+#define OFFSET_BIT 6

@@ -4,10 +4,13 @@
 void binary_print(size_t addr,int size)
 {
 	int i;
-
 	for(i=1;i<=size;i++)
 	{
 		printf("%d",(int)(addr>>(size-1)));
+		if(i==47 || i==58)
+		{
+			printf("|");
+		}
 		if(i%4==0)
 		{
 			printf(" ");
