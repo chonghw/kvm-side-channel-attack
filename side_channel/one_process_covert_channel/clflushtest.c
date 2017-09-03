@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <mem.h>
@@ -17,7 +18,7 @@ typedef struct cache_set
 	int index;
 	int top;
 	int length;
-	char *cache_lines[WAY*SLICE];
+	char *cache_lines[WAY*SLICE*2];
 	cache_set *next;
 	cache_set *prev;
 }Cache_set;
@@ -25,43 +26,91 @@ typedef struct cache_set
 
 void print_candidate_info(Cache_set* candidate_head);
 void print_candidate_data(Cache_set* candidate_head);
-void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr);
+void cache_line_to_cadidate(Cache_set *head, uint64_t cache_line_addr);
 Cache_set* make_cache_set();
 Cache_set* make_candidate_set();
-int make_index_set(size_t addr);
-uint64_t probe(uint64_t *start, const size_t n);
+int make_index(uint64_t addr);
+Cache_set* make_conflict_set(Cache_set* candidate_head);
 
 int main()
 {
 	Cache_set* candidate_head;
+	Cache_set *conflict_head;
+
+	printf("=========make candidates=========\n");
 	candidate_head=make_candidate_set();
+
+	print_candidate_info(candidate_head);
+	getc(stdin);
+	print_candidate_data(candidate_head);
+
+
+	printf("=========make conflict set=========\n");
+	conflict_head=make_conflict_set(candidate_head);
+
 	return 0;
 }
 
-uint64_t probe(uint64_t *start, const size_t n) 
+
+
+Cache_set* make_conflict_set(Cache_set* candidate_head)
 {
+	int threshold;
+	size_t i,j;
 	uint64_t cycle;
-	uint64_t a, d;
-	uint64_t *ptr;
-	uint64_t addr;
-	size_t i;
+	uint64_t a,d;
+	size_t conflict_cycle[WAY*SLICE];
 
-	ptr = start;
-	__asm__("lfence;");
-	asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
-	cycle = (a | ((uint64_t)d << 32));
-	__asm__("mov -0x40(%rbp), %r8;");
-	for(i = 0; i < n; i++)
-		__asm__("mov (%r8), %r8;");
-	__asm__("lfence;");
-	asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
-	cycle = (a | ((uint64_t)d << 32)) - cycle;
 
-	return cycle;
+	Cache_set tmp_conflict_set;
+
+	for(i=0;i<WAY*SLICE;i++)
+	{
+		tmp_conflict_set.cache_lines[i]=(char*)malloc(sizeof(char));
+	}
+
+	Cache_set *tmp_candidate_head=candidate_head;
+	Cache_set *conflict_set=make_cache_set();
+
+	for(tmp_candidate_head;;tmp_candidate_head=tmp_candidate_head->next)
+	{
+		if(tmp_candidate_head->index!=-1)
+		{
+			while(tmp_conflict_set.top!=WAY*SLICE)
+			{
+				tmp_conflict_set.top=0;
+				tmp_conflict_set.index=tmp_candidate_head->index;
+				for(i=0;i<tmp_candidate_head->top;i++)
+				{
+					*tmp_candidate_head->cache_lines[i]=0x1;   //push candidate into cache
+
+					for(j=0;j<tmp_conflict_set.top;j++)
+					{
+						*tmp_conflict_set.cache_lines[j]=0x1;   //push conflict into cache
+					}
+
+					__asm__("lfence;");
+					asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");  //save start time
+					cycle = (a | ((uint64_t)d << 32));
+
+					*tmp_candidate_head->cache_lines[i]=0x1;   //push candidate into cache
+					
+					__asm__("lfence;");
+					asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+					cycle = (a | ((uint64_t)d << 32)) - cycle;
+
+				}
+			}
+		}
+
+		if(tmp_candidate_head->next==NULL)
+		{
+			break;
+		}
+	}
 }
 
-
-int make_index_set(size_t addr)
+int make_index(uint64_t addr)
 {
 	int left_shift=64-(INDEX_SET_BIT+OFFSET_BIT);
 	int right_shift=64-INDEX_SET_BIT;
@@ -79,11 +128,12 @@ Cache_set* make_cache_set()
 	return head;
 }
 
-void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr)
+void cache_line_to_cadidate(Cache_set *head, uint64_t cache_line_addr)
 {
 	Cache_set *tmp_head=head;
 	Cache_set *new_cache_set;
-	int index=make_index_set(cache_line_addr);
+	int index=make_index(cache_line_addr);
+	int cache_lines_top_max=WAY*SLICE*2;
 
 	//binary_print(cache_line_addr,64); printf("\n");
 	for(tmp_head;;tmp_head=tmp_head->next)
@@ -91,7 +141,7 @@ void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr)
 		if(tmp_head->index==index)
 		{
 			//printf("index hit:%d    ",index);
-			if(tmp_head->top<WAY*SLICE)
+			if(tmp_head->top<cache_lines_top_max)
 			{
 				tmp_head->cache_lines[tmp_head->top]=(char*)cache_line_addr;
 				tmp_head->top++;
@@ -115,7 +165,6 @@ void cache_line_to_cadidate(Cache_set *head, size_t cache_line_addr)
 	new_cache_set->prev=tmp_head;
 	//getc(stdin);
 }
-
 
 Cache_set* make_candidate_set()
 {
@@ -143,7 +192,7 @@ Cache_set* make_candidate_set()
 			//printf("push addr_%6lu_",( (j<<tag_bit_shift) | (i<<OFFSET_BIT) ));
 			//binary_print(((j<<tag_bit_shift) | (i<<OFFSET_BIT)),64); printf("\n");
 			//
-			cache_line_to_cadidate(candidate_head,(size_t)shm_addr+((j<<tag_bit_shift) | (i<<OFFSET_BIT)));  //make address
+			cache_line_to_cadidate(candidate_head,(uint64_t)shm_addr+((j<<tag_bit_shift) | (i<<OFFSET_BIT)));  //make address
 			*((char*)shm_addr+((j<<tag_bit_shift) | (i<<OFFSET_BIT)))=0x1;  //push data
 			//
 			//printf("end\n");
@@ -151,14 +200,16 @@ Cache_set* make_candidate_set()
 		//printf("\n");
 	}
 
+	/*
 	printf("base_address:");
-	binary_print((size_t)shm_addr,64); printf("\n");
+	binary_print((uint64_t)shm_addr,64); printf("\n");
 
 	printf("===============list info===============\n");
 	print_candidate_info(candidate_head);
 	getc(stdin);
 
 	print_candidate_data(candidate_head);
+	*/
 
 
 	return candidate_head;
@@ -172,8 +223,8 @@ void print_candidate_data(Cache_set* candidate_head)
 	{
 		for(i=0;i<tmp_head->top;i++)
 		{
-			printf("index:%4d    top:%3lu    address:%lu(",tmp_head->index, i, (size_t)tmp_head->cache_lines[i]);
-			binary_print((size_t)tmp_head->cache_lines[i],64);
+			printf("index:%4d    top:%3lu    address:%lu(",tmp_head->index, i, (uint64_t)tmp_head->cache_lines[i]);
+			binary_print((uint64_t)tmp_head->cache_lines[i],64);
 			printf(")    value:%d\n",*tmp_head->cache_lines[i]);
 		}
 		if(tmp_head->next==NULL)
@@ -190,7 +241,7 @@ void print_candidate_info(Cache_set* candidate_head)
 	for(tmp_head;;tmp_head=tmp_head->next)
 	{
 		printf("index:%4d    top:%3d    index_binary(",tmp_head->index,tmp_head->top);
-		binary_print((size_t)(tmp_head->index<<6),64);
+		binary_print((uint64_t)(tmp_head->index<<6),64);
 		printf(")\n");
 		if(tmp_head->next==NULL)
 		{

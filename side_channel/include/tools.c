@@ -1,7 +1,7 @@
 #include "tools.h"
 
 
-void binary_print(size_t addr,int size)
+void binary_print(uint64_t addr,int size)
 {
 	int i;
 	for(i=1;i<=size;i++)
