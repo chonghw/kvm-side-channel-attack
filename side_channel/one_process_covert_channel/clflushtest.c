@@ -31,6 +31,7 @@ Cache_set* make_cache_set();
 Cache_set* make_candidate_set();
 int make_index(uint64_t addr);
 Cache_set* make_conflict_set(Cache_set* candidate_head);
+uint64_t measure_candidate_rtime(Cache_set* cache_set,char* candidate);
 
 int main()
 {
@@ -51,6 +52,49 @@ int main()
 	return 0;
 }
 
+
+int access_time_asc(void *a, void *b)
+{
+	if( *(uint64_t *)a > *(uint64_t *)b )
+	{
+		return 1;
+	}
+	else if(*(uint64_t *)a < *(uint64_t *)b )
+	{	
+		return -1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+uint64_t measure_candidate_access_time(Cache_set* conflict_set,char* candidate)
+{
+	int loop=100;
+	uint64_t access_time[loop];
+	uint64_t i,j;
+
+	for(i=0;i<loop;i++)
+	{
+		*candidate=0x1;   //push candidate into cache
+
+		for(j=0;j<conflict_set->top;j++)
+		{
+			*conflict_set->cache_lines[j]=0x1;
+		}
+		__asm__("lfence;");
+		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");  //save start time
+		cycle = (a | ((uint64_t)d << 32));
+
+		*candidate=0x1;   //push candidate into cache
+
+		__asm__("lfence;");
+		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+		access_time[i]=(a | ((uint64_t)d << 32)) - cycle;
+	}
+	qsort(access_time,loop,sizeof(uint64_t),access_time_asc);
+	return access_time_asc[loop/2];
+}
 
 
 Cache_set* make_conflict_set(Cache_set* candidate_head)
@@ -82,23 +126,7 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 				tmp_conflict_set.index=tmp_candidate_head->index;
 				for(i=0;i<tmp_candidate_head->top;i++)
 				{
-					*tmp_candidate_head->cache_lines[i]=0x1;   //push candidate into cache
-
-					for(j=0;j<tmp_conflict_set.top;j++)
-					{
-						*tmp_conflict_set.cache_lines[j]=0x1;   //push conflict into cache
-					}
-
-					__asm__("lfence;");
-					asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");  //save start time
-					cycle = (a | ((uint64_t)d << 32));
-
-					*tmp_candidate_head->cache_lines[i]=0x1;   //push candidate into cache
-					
-					__asm__("lfence;");
-					asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
-					cycle = (a | ((uint64_t)d << 32)) - cycle;
-
+					measure_candidate_access_time(&tmp_conflict_set, tmp_candidate_head->cache_lines[i]);
 				}
 			}
 		}
