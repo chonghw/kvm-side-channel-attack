@@ -23,6 +23,13 @@ typedef struct cache_set
 	cache_set *prev;
 }Cache_set;
 
+typedef struct conflict_set
+{
+	int top;
+	uint64_t access_time[WAY*SLICE*2];
+	char *cache_lines[WAY*SLICE*2];
+}Conflict_set;
+
 
 void print_candidate_info(Cache_set* candidate_head);
 void print_candidate_data(Cache_set* candidate_head);
@@ -32,6 +39,8 @@ Cache_set* make_candidate_set();
 int make_index(uint64_t addr);
 Cache_set* make_conflict_set(Cache_set* candidate_head);
 uint64_t measure_candidate_rtime(Cache_set* cache_set,char* candidate);
+void qsort_conflict_set_asc(Conflict_set* conflict_set,int left,int right);
+int access_time_asc(const void *a, const void *b);
 
 int main()
 {
@@ -53,7 +62,7 @@ int main()
 }
 
 
-int access_time_asc(void *a, void *b)
+int access_time_asc(const void *a, const void *b)
 {
 	if( *(uint64_t *)a > *(uint64_t *)b )
 	{
@@ -68,8 +77,10 @@ int access_time_asc(void *a, void *b)
 		return 0;
 	}
 }
-uint64_t measure_candidate_access_time(Cache_set* conflict_set,char* candidate)
+uint64_t measure_candidate_access_time(Conflict_set* conflict_set,char* candidate)
 {
+	uint64_t cycle;
+	uint64_t a,d;
 	int loop=100;
 	uint64_t access_time[loop];
 	uint64_t i,j;
@@ -93,28 +104,64 @@ uint64_t measure_candidate_access_time(Cache_set* conflict_set,char* candidate)
 		access_time[i]=(a | ((uint64_t)d << 32)) - cycle;
 	}
 	qsort(access_time,loop,sizeof(uint64_t),access_time_asc);
-	return access_time_asc[loop/2];
+	return access_time[loop/2];
+}
+
+
+void qsort_conflict_set_asc(Conflict_set* conflict_set,int left,int right)
+{
+	int pivot=left;
+	int left_end=pivot+1;
+	uint64_t tmp_time;
+	char *tmp_cache_line;
+	int i;
+
+	if(right-left<=1)
+	{
+		return;
+	}
+
+	for(i=left_end;i<right;i++)
+	{
+		if(conflict_set->access_time[i]<conflict_set->access_time[pivot])
+		{
+
+			tmp_time=conflict_set->access_time[i];
+			conflict_set->access_time[i]=conflict_set->access_time[left_end];
+			conflict_set->access_time[left_end]=tmp_time;
+
+			tmp_cache_line=conflict_set->cache_lines[i];
+			conflict_set->cache_lines[i]=conflict_set->cache_lines[left_end];
+			conflict_set->cache_lines[left_end]=tmp_cache_line;
+
+			left_end++;
+
+
+		}
+	}
+	tmp_time=conflict_set->access_time[pivot];
+	conflict_set->access_time[pivot]=conflict_set->access_time[left_end-1];
+	conflict_set->access_time[left_end-1]=tmp_time;
+
+	tmp_cache_line=conflict_set->cache_lines[pivot];
+	conflict_set->cache_lines[pivot]=conflict_set->cache_lines[left_end-1];
+	conflict_set->cache_lines[left_end-1]=tmp_cache_line;
+
+	qsort_conflict_set_asc(conflict_set,left,left_end);
+	qsort_conflict_set_asc(conflict_set,left_end,right);
 }
 
 
 Cache_set* make_conflict_set(Cache_set* candidate_head)
 {
 	int threshold;
-	size_t i,j;
-	uint64_t cycle;
-	uint64_t a,d;
-	size_t conflict_cycle[WAY*SLICE];
-
-
-	Cache_set tmp_conflict_set;
-
-	for(i=0;i<WAY*SLICE;i++)
-	{
-		tmp_conflict_set.cache_lines[i]=(char*)malloc(sizeof(char));
-	}
+	uint64_t access_time;
+	uint64_t i,j;
+	Conflict_set tmp_conflict_set;
 
 	Cache_set *tmp_candidate_head=candidate_head;
 	Cache_set *conflict_set=make_cache_set();
+
 
 	for(tmp_candidate_head;;tmp_candidate_head=tmp_candidate_head->next)
 	{
@@ -123,11 +170,25 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 			while(tmp_conflict_set.top!=WAY*SLICE)
 			{
 				tmp_conflict_set.top=0;
-				tmp_conflict_set.index=tmp_candidate_head->index;
 				for(i=0;i<tmp_candidate_head->top;i++)
 				{
-					measure_candidate_access_time(&tmp_conflict_set, tmp_candidate_head->cache_lines[i]);
+					access_time=measure_candidate_access_time(&tmp_conflict_set, tmp_candidate_head->cache_lines[i]);
+					tmp_conflict_set.access_time[i]=access_time;
+					tmp_conflict_set.cache_lines[i]=tmp_candidate_head->cache_lines[i];
 				}
+
+				qsort_conflict_set_asc(&tmp_conflict_set,0,tmp_conflict_set.top);
+
+				threshold= tmp_conflict_set.access_time[ (tmp_conflict_set.top-1)/4 ];
+
+				for(i=0;i<tmp_conflict_set.top;i++)
+				{
+					if(tmp_conflict_set.access_time[i] > threshold && tmp_conflict_set.access_time[i] < threshold + 20)
+					{
+						threshold= tmp_conflict_set.access_time[i];
+					}
+				}
+
 			}
 		}
 

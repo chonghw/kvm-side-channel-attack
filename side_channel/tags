@@ -21,6 +21,7 @@ CFLAGS	Rule.mak	/^CFLAGS= -I. -I$(INCLUDE) -I$(LIBINCLUDE)$/;"	m
 CONFLICT_SET	prev-side/hoon_covert/attack.c	/^s_set *CONFLICT_SET[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
 CP	one_process_covert_channel/makefile	/^CP=g++$/;"	m
 Cache_set	one_process_covert_channel/clflushtest.c	/^}Cache_set;$/;"	t	typeref:struct:cache_set	file:
+Conflict_set	one_process_covert_channel/clflushtest.c	/^}Conflict_set;$/;"	t	typeref:struct:conflict_set	file:
 DATA	prev-side/160925_attack/main.c	/^char DATA[2 << 15] = {0};$/;"	v
 DATA	prev-side/160926_attack/main.c	/^char DATA[2 << 15] = {0};$/;"	v
 DEBUG	prev-side/hoon_covert/rs.c	/^int DEBUG = FALSE;$/;"	v
@@ -239,6 +240,8 @@ __BASE_H__	prev-side/hoon_covert/base.h	2;"	d
 __COVERT_CHANNEL_H__	prev-side/hoon_covert/attack.h	2;"	d
 __MEMORY_H__	prev-side/160711-2/memory.h	2;"	d
 __SET_H__	prev-side/160711-2/set.h	2;"	d
+access_time	one_process_covert_channel/clflushtest.c	/^	uint64_t access_time[WAY*SLICE*2];$/;"	m	struct:conflict_set	file:
+access_time_asc	one_process_covert_channel/clflushtest.c	/^int access_time_asc(const void *a, const void *b)$/;"	f
 add_polys	prev-side/hoon_covert/berlekamp.c	/^void add_polys (int dst[], int src[]) $/;"	f
 addr	prev-side/160711-2/set.h	/^	void *addr;$/;"	m	struct:element
 address	multi_process_covert_channel/receiver.c	/^	ADDRESS address;$/;"	m	struct:candidate	file:
@@ -256,6 +259,7 @@ cache	prev-side/160711-2/main.c	/^s_cache_info cache;$/;"	v
 cache	prev-side/160711-2/memory.h	/^typedef struct cache {$/;"	s
 cache_line_to_cadidate	one_process_covert_channel/clflushtest.c	/^void cache_line_to_cadidate(Cache_set *head, uint64_t cache_line_addr)$/;"	f
 cache_lines	one_process_covert_channel/clflushtest.c	/^	char *cache_lines[WAY*SLICE*2];$/;"	m	struct:cache_set	file:
+cache_lines	one_process_covert_channel/clflushtest.c	/^	char *cache_lines[WAY*SLICE*2];$/;"	m	struct:conflict_set	file:
 cache_set	one_process_covert_channel/clflushtest.c	/^typedef struct cache_set$/;"	s	file:
 candidate	multi_process_covert_channel/receiver.c	/^typedef struct candidate$/;"	s	file:
 candidate	multi_process_covert_channel/receiver.c	/^}candidate;$/;"	t	typeref:struct:candidate	file:
@@ -282,6 +286,7 @@ compute_discrepancy	prev-side/hoon_covert/berlekamp.c	/^compute_discrepancy (int
 compute_genpoly	prev-side/hoon_covert/rs.c	/^compute_genpoly (int nbytes, int genpoly[])$/;"	f	file:
 compute_modified_omega	prev-side/hoon_covert/berlekamp.c	/^compute_modified_omega ()$/;"	f
 compute_next_omega	prev-side/hoon_covert/berlekamp.c	/^compute_next_omega (int d, int A[], int dst[], int src[])$/;"	f
+conflict_set	one_process_covert_channel/clflushtest.c	/^typedef struct conflict_set$/;"	s	file:
 copy_poly	prev-side/hoon_covert/berlekamp.c	/^void copy_poly (int dst[], int src[]) $/;"	f
 copy_set	prev-side/160711-2/set.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
 copy_set	prev-side/160922_attack/base.c	/^s_set *copy_set(const s_set *set_src) {$/;"	f
@@ -608,5 +613,6 @@ table	prev-side/hoon_covert/base.h	/^typedef struct table {$/;"	s
 tmpc	prev-side/analyze.c	/^char result[1000000], tmpc;$/;"	v
 tmpc	prev-side/hoon_covert/analyze_tool/analyze.c	/^char result[1000000], tmpc;$/;"	v
 top	one_process_covert_channel/clflushtest.c	/^	int top;$/;"	m	struct:cache_set	file:
+top	one_process_covert_channel/clflushtest.c	/^	int top;$/;"	m	struct:conflict_set	file:
 zero_fill_from	prev-side/hoon_covert/rs.c	/^zero_fill_from (unsigned char buf[], int from, int to)$/;"	f
 zero_poly	prev-side/hoon_covert/berlekamp.c	/^void zero_poly (int poly[]) $/;"	f
