@@ -472,7 +472,7 @@ make_cache_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_cache_
 make_candidate_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_candidate_set()$/;"	f
 make_conflict_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_conflict_set(Cache_set* candidate_head)$/;"	f
 make_index	one_process_covert_channel/clflushtest.c	/^int make_index(uint64_t addr)$/;"	f
-measure_candidate_access_time	one_process_covert_channel/clflushtest.c	/^uint64_t measure_candidate_access_time(Cache_set* conflict_set,char* candidate)$/;"	f
+measure_candidate_access_time	one_process_covert_channel/clflushtest.c	/^uint64_t measure_candidate_access_time(Conflict_set* conflict_set,char* candidate)$/;"	f
 memory	prev-side/160711-2/main.c	/^s_memory_info memory;$/;"	v
 memory	prev-side/160711-2/memory.h	/^typedef struct memory {$/;"	s
 memory	prev-side/160922_attack/base.h	/^typedef struct memory {$/;"	s
@@ -540,6 +540,7 @@ process	prev-side/analyze.c	/^void process()$/;"	f
 process	prev-side/hoon_covert/analyze_tool/analyze.c	/^void process()$/;"	f
 process	prev-side/hoon_covert/analyze_tool/analyze.py	/^def process():$/;"	f
 ptr	prev-side/160711-2/memory.h	/^	void *ptr;$/;"	m	struct:memory
+qsort_conflict_set_asc	one_process_covert_channel/clflushtest.c	/^void qsort_conflict_set_asc(Conflict_set* conflict_set,int left,int right)$/;"	f
 randomize_elements	prev-side/160922_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f
 randomize_elements	prev-side/160924_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f
 randomize_elements	prev-side/160925_attack/base.c	/^int randomize_elements(s_set *set) {$/;"	f

@@ -49,12 +49,13 @@ int main()
 
 	printf("=========make candidates=========\n");
 	candidate_head=make_candidate_set();
-
+	printf("=========end make candidates=========\n");
+	getc(stdin);
+	/*
 	print_candidate_info(candidate_head);
 	getc(stdin);
 	print_candidate_data(candidate_head);
-
-
+	*/
 	printf("=========make conflict set=========\n");
 	conflict_head=make_conflict_set(candidate_head);
 
@@ -84,72 +85,38 @@ uint64_t measure_candidate_access_time(Conflict_set* conflict_set,char* candidat
 	int loop=100;
 	uint64_t access_time[loop];
 	uint64_t i,j;
+	char data;
 
 	for(i=0;i<loop;i++)
 	{
 		*candidate=0x1;   //push candidate into cache
+		data=*candidate;
 
 		for(j=0;j<conflict_set->top;j++)
 		{
 			*conflict_set->cache_lines[j]=0x1;
+			data=*conflict_set->cache_lines[j];
 		}
 		__asm__("lfence;");
 		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");  //save start time
 		cycle = (a | ((uint64_t)d << 32));
 
-		*candidate=0x1;   //push candidate into cache
+		//*candidate=0x1;   //push candidate into cache
+		data=*candidate;
 
 		__asm__("lfence;");
 		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
 		access_time[i]=(a | ((uint64_t)d << 32)) - cycle;
+		//printf("%lu access time: %lu\n",i,access_time[i]);
 	}
 	qsort(access_time,loop,sizeof(uint64_t),access_time_asc);
+	for(i=0;i<loop;i++)
+	{
+		printf("measeure %lu : %lu\n",i,access_time[i]);
+	}
 	return access_time[loop/2];
 }
 
-
-void qsort_conflict_set_asc(Conflict_set* conflict_set,int left,int right)
-{
-	int pivot=left;
-	int left_end=pivot+1;
-	uint64_t tmp_time;
-	char *tmp_cache_line;
-	int i;
-
-	if(right-left<=1)
-	{
-		return;
-	}
-
-	for(i=left_end;i<right;i++)
-	{
-		if(conflict_set->access_time[i]<conflict_set->access_time[pivot])
-		{
-
-			tmp_time=conflict_set->access_time[i];
-			conflict_set->access_time[i]=conflict_set->access_time[left_end];
-			conflict_set->access_time[left_end]=tmp_time;
-
-			tmp_cache_line=conflict_set->cache_lines[i];
-			conflict_set->cache_lines[i]=conflict_set->cache_lines[left_end];
-			conflict_set->cache_lines[left_end]=tmp_cache_line;
-
-			left_end++;
-
-
-		}
-	}
-	tmp_time=conflict_set->access_time[pivot];
-	conflict_set->access_time[pivot]=conflict_set->access_time[left_end-1];
-	conflict_set->access_time[left_end-1]=tmp_time;
-
-	tmp_cache_line=conflict_set->cache_lines[pivot];
-	conflict_set->cache_lines[pivot]=conflict_set->cache_lines[left_end-1];
-	conflict_set->cache_lines[left_end-1]=tmp_cache_line;
-
-	qsort_conflict_set_asc(conflict_set,left,left_end);
-	qsort_conflict_set_asc(conflict_set,left_end,right);
-}
 
 
 Cache_set* make_conflict_set(Cache_set* candidate_head)
@@ -157,7 +124,7 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 	int threshold;
 	uint64_t access_time;
 	uint64_t i,j;
-	Conflict_set tmp_conflict_set;
+	Conflict_set tmp_conflict_set,result_conflict_set;
 
 	Cache_set *tmp_candidate_head=candidate_head;
 	Cache_set *conflict_set=make_cache_set();
@@ -167,17 +134,38 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 	{
 		if(tmp_candidate_head->index!=-1)
 		{
-			while(tmp_conflict_set.top!=WAY*SLICE)
+			while(1)
 			{
 				tmp_conflict_set.top=0;
 				for(i=0;i<tmp_candidate_head->top;i++)
 				{
+					//printf("candidate %lu\n",i);
 					access_time=measure_candidate_access_time(&tmp_conflict_set, tmp_candidate_head->cache_lines[i]);
+					//printf("avg access time %lu\n",access_time);
+					//getc(stdin);
 					tmp_conflict_set.access_time[i]=access_time;
 					tmp_conflict_set.cache_lines[i]=tmp_candidate_head->cache_lines[i];
+					tmp_conflict_set.top++;
 				}
 
+				///////////////////////////////////////////////////////////////
+				printf("check cycle save state\n");
+				for(i=0;i<tmp_conflict_set.top;i++)
+				{
+					printf("%3lu: %5lu %lu\n",i,tmp_conflict_set.access_time[i],(uint64_t)tmp_conflict_set.cache_lines[i]);
+				}
+				getc(stdin);
+				///////////////////////////////////////////////////////////////
 				qsort_conflict_set_asc(&tmp_conflict_set,0,tmp_conflict_set.top);
+
+				///////////////////////////////////////////////////////////////
+				printf("check sorting state\n");
+				for(i=0;i<tmp_conflict_set.top;i++)
+				{
+					printf("%3lu: %5lu %lu\n",i,tmp_conflict_set.access_time[i],(uint64_t)tmp_conflict_set.cache_lines[i]);
+				}
+				getc(stdin);
+				///////////////////////////////////////////////////////////////
 
 				threshold= tmp_conflict_set.access_time[ (tmp_conflict_set.top-1)/4 ];
 
@@ -188,7 +176,37 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 						threshold= tmp_conflict_set.access_time[i];
 					}
 				}
+				threshold=100;
+				///////////////////////////////////////////////////////////////
+				printf("threshold is %d\n",threshold);
+				getc(stdin);
+				///////////////////////////////////////////////////////////////
 
+				result_conflict_set.top=0;
+				for(i=0;i<tmp_conflict_set.top;i++)
+				{
+					if(tmp_conflict_set.access_time[i] <= threshold)
+					{
+						result_conflict_set.cache_lines[i]=tmp_conflict_set.cache_lines[i];
+						result_conflict_set.top++;
+					}
+				}
+
+
+				///////////////////////////////////////////////////////////////
+				printf("colflict top is %d\n",result_conflict_set.top);
+				getc(stdin);
+				///////////////////////////////////////////////////////////////
+
+				if(result_conflict_set.top==WAY*SLICE)
+				{
+					for(i=0;i<result_conflict_set.top;i++)
+					{
+						printf("threshold:%d\n",threshold);
+						cache_line_to_cadidate(conflict_set,(uint64_t)result_conflict_set.cache_lines[i]);
+					}
+					break;
+				}
 			}
 		}
 
@@ -342,3 +360,45 @@ void print_candidate_info(Cache_set* candidate_head)
 
 
 
+void qsort_conflict_set_asc(Conflict_set* conflict_set,int left,int right)
+{
+	int pivot=left;
+	int left_end=pivot+1;
+	uint64_t tmp_time;
+	char *tmp_cache_line;
+	int i;
+
+	if(right-left<=1)
+	{
+		return;
+	}
+
+	for(i=left_end;i<right;i++)
+	{
+		if(conflict_set->access_time[i]<conflict_set->access_time[pivot])
+		{
+
+			tmp_time=conflict_set->access_time[i];
+			conflict_set->access_time[i]=conflict_set->access_time[left_end];
+			conflict_set->access_time[left_end]=tmp_time;
+
+			tmp_cache_line=conflict_set->cache_lines[i];
+			conflict_set->cache_lines[i]=conflict_set->cache_lines[left_end];
+			conflict_set->cache_lines[left_end]=tmp_cache_line;
+
+			left_end++;
+
+
+		}
+	}
+	tmp_time=conflict_set->access_time[pivot];
+	conflict_set->access_time[pivot]=conflict_set->access_time[left_end-1];
+	conflict_set->access_time[left_end-1]=tmp_time;
+
+	tmp_cache_line=conflict_set->cache_lines[pivot];
+	conflict_set->cache_lines[pivot]=conflict_set->cache_lines[left_end-1];
+	conflict_set->cache_lines[left_end-1]=tmp_cache_line;
+
+	qsort_conflict_set_asc(conflict_set,left,left_end);
+	qsort_conflict_set_asc(conflict_set,left_end,right);
+}
