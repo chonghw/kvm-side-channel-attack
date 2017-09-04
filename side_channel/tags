@@ -17,7 +17,7 @@ BIT32	prev-side/hoon_covert/ecc.h	/^typedef unsigned long BIT32;$/;"	t
 CACHELINE_SIZE	include/mem.h	2;"	d
 CACHE_SET_INDEX	prev-side/160909_attack/main.c	/^size_t CACHE_SET_INDEX[N_CACHE_SET_INDICES_MAX] = {0};$/;"	v
 CC	multi_process_covert_channel/makefile	/^CC=gcc$/;"	m
-CFLAGS	Rule.mak	/^CFLAGS= -I. -I$(INCLUDE) -I$(LIBINCLUDE)$/;"	m
+CFLAGS	Rule.mak	/^CFLAGS= -I. -I$(INCLUDE) -I$(LIBINCLUDE) -g$/;"	m
 CONFLICT_SET	prev-side/hoon_covert/attack.c	/^s_set *CONFLICT_SET[N_CACHE_SET_INDICES_MAX] = {NULL};$/;"	v
 CP	one_process_covert_channel/makefile	/^CP=g++$/;"	m
 Cache_set	one_process_covert_channel/clflushtest.c	/^}Cache_set;$/;"	t	typeref:struct:cache_set	file:
@@ -471,8 +471,9 @@ main	prev-side/hoon_covert/main.c	/^int main(const int argc, char *argv[]) {$/;"
 make_cache_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_cache_set()$/;"	f
 make_candidate_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_candidate_set()$/;"	f
 make_conflict_set	one_process_covert_channel/clflushtest.c	/^Cache_set* make_conflict_set(Cache_set* candidate_head)$/;"	f
+make_conflict_threshold	one_process_covert_channel/clflushtest.c	/^uint64_t make_conflict_threshold()$/;"	f
 make_index	one_process_covert_channel/clflushtest.c	/^int make_index(uint64_t addr)$/;"	f
-measure_candidate_access_time	one_process_covert_channel/clflushtest.c	/^uint64_t measure_candidate_access_time(Conflict_set* conflict_set,char* candidate)$/;"	f
+measure_candidate_time	one_process_covert_channel/clflushtest.c	/^int measure_candidate_time(uint64_t threashold, char* candidate, Conflict_set *conflict_set)$/;"	f
 memory	prev-side/160711-2/main.c	/^s_memory_info memory;$/;"	v
 memory	prev-side/160711-2/memory.h	/^typedef struct memory {$/;"	s
 memory	prev-side/160922_attack/base.h	/^typedef struct memory {$/;"	s

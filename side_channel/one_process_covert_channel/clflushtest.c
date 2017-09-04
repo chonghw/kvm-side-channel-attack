@@ -30,17 +30,65 @@ typedef struct conflict_set
 	char *cache_lines[WAY*SLICE*2];
 }Conflict_set;
 
-
+//for debug
 void print_candidate_info(Cache_set* candidate_head);
 void print_candidate_data(Cache_set* candidate_head);
+
+//cache_set struct linked list
 void cache_line_to_cadidate(Cache_set *head, uint64_t cache_line_addr);
 Cache_set* make_cache_set();
+
+//for candidate 
 Cache_set* make_candidate_set();
 int make_index(uint64_t addr);
+
+//for conflict
 Cache_set* make_conflict_set(Cache_set* candidate_head);
-uint64_t measure_candidate_rtime(Cache_set* cache_set,char* candidate);
 void qsort_conflict_set_asc(Conflict_set* conflict_set,int left,int right);
 int access_time_asc(const void *a, const void *b);
+uint64_t make_conflict_threshold();
+int measure_candidate_time(uint64_t threashold, char* candidate, Conflict_set *conflict_set);
+
+int measure_candidate_time(uint64_t threashold, char* candidate, Conflict_set *conflict_set)
+{
+	uint64_t a,d;
+	volatile char *tmp_data=(char*)malloc(sizeof(char));
+	uint64_t i;
+	volatile uint64_t cycle_start,cycle_end;
+
+	*tmp_data=*candidate;
+	for(i=0;i<conflict_set->top;i++)
+	{
+		*tmp_data=*conflict_set->cache_lines[i];
+	}
+
+
+	__asm__("lfence;");
+	asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+	cycle_start = (a | ((uint64_t)d << 32));
+
+	*tmp_data=*candidate;
+
+	__asm__("lfence;");
+	asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+	cycle_end = (a | ((uint64_t)d << 32));
+
+	printf("cycle:%lu\n",cycle_end-cycle_start);
+
+	if(cycle_end-cycle_start>threashold)
+	{
+		return 1;
+	}
+	else if(cycle_end-cycle_start<threashold)
+	{
+		return -1;
+	}
+	else
+	{
+		return 0;
+	}
+
+}
 
 int main()
 {
@@ -78,43 +126,55 @@ int access_time_asc(const void *a, const void *b)
 		return 0;
 	}
 }
-uint64_t measure_candidate_access_time(Conflict_set* conflict_set,char* candidate)
+
+uint64_t make_conflict_threshold()
 {
-	uint64_t cycle;
+	volatile char test;
+	volatile char data;
+	uint64_t normal_time,delay_time,threshold;
 	uint64_t a,d;
-	int loop=100;
-	uint64_t access_time[loop];
-	uint64_t i,j;
-	char data;
+	int i;
+	volatile uint64_t cycle_start,cycle_end;
+	uint64_t normal_max=0,delay_max=0;
 
-	for(i=0;i<loop;i++)
+	for(i=0;i<100;i++)
 	{
-		*candidate=0x1;   //push candidate into cache
-		data=*candidate;
-
-		for(j=0;j<conflict_set->top;j++)
-		{
-			*conflict_set->cache_lines[j]=0x1;
-			data=*conflict_set->cache_lines[j];
-		}
-		__asm__("lfence;");
-		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");  //save start time
-		cycle = (a | ((uint64_t)d << 32));
-
-		//*candidate=0x1;   //push candidate into cache
-		data=*candidate;
+		test=1;
+		clflush(&test,CACHELINE_SIZE);
 
 		__asm__("lfence;");
 		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
-		access_time[i]=(a | ((uint64_t)d << 32)) - cycle;
-		//printf("%lu access time: %lu\n",i,access_time[i]);
+		cycle_start = (a | ((uint64_t)d << 32));
+
+		data=test;
+
+		__asm__("lfence;");
+		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+		cycle_end = (a | ((uint64_t)d << 32));
+		printf("delay time:%4lu    ", cycle_end - cycle_start);
+
+		delay_max+=(cycle_end-cycle_start);
+
+
+		test=1;
+		__asm__("lfence;");
+		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+		cycle_start = (a | ((uint64_t)d << 32));
+
+		data=test;
+
+		__asm__("lfence;");
+		asm volatile ("rdtsc;" : "=a" (a), "=d" (d) : : "ebx", "ecx");
+		cycle_end = (a | ((uint64_t)d << 32));
+		printf("normal time:%4lu\n",cycle_end - cycle_start);
+
+		normal_max+=(cycle_end-cycle_start);
+
+
 	}
-	qsort(access_time,loop,sizeof(uint64_t),access_time_asc);
-	for(i=0;i<loop;i++)
-	{
-		printf("measeure %lu : %lu\n",i,access_time[i]);
-	}
-	return access_time[loop/2];
+	printf("delay max: %4lu    normal max: %4lu    threshold: %4lu\n",delay_max/100,normal_max/100,((delay_max/100)-(normal_max/100))/2);
+	getc(stdin);
+	return ((delay_max/100)-(normal_max/100))/2;
 }
 
 
@@ -129,6 +189,8 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 	Cache_set *tmp_candidate_head=candidate_head;
 	Cache_set *conflict_set=make_cache_set();
 
+	threshold=make_conflict_threshold();
+	//threshold=100;
 
 	for(tmp_candidate_head;;tmp_candidate_head=tmp_candidate_head->next)
 	{
@@ -139,72 +201,19 @@ Cache_set* make_conflict_set(Cache_set* candidate_head)
 				tmp_conflict_set.top=0;
 				for(i=0;i<tmp_candidate_head->top;i++)
 				{
-					//printf("candidate %lu\n",i);
-					access_time=measure_candidate_access_time(&tmp_conflict_set, tmp_candidate_head->cache_lines[i]);
-					//printf("avg access time %lu\n",access_time);
-					//getc(stdin);
-					tmp_conflict_set.access_time[i]=access_time;
-					tmp_conflict_set.cache_lines[i]=tmp_candidate_head->cache_lines[i];
-					tmp_conflict_set.top++;
-				}
-
-				///////////////////////////////////////////////////////////////
-				printf("check cycle save state\n");
-				for(i=0;i<tmp_conflict_set.top;i++)
-				{
-					printf("%3lu: %5lu %lu\n",i,tmp_conflict_set.access_time[i],(uint64_t)tmp_conflict_set.cache_lines[i]);
-				}
-				getc(stdin);
-				///////////////////////////////////////////////////////////////
-				qsort_conflict_set_asc(&tmp_conflict_set,0,tmp_conflict_set.top);
-
-				///////////////////////////////////////////////////////////////
-				printf("check sorting state\n");
-				for(i=0;i<tmp_conflict_set.top;i++)
-				{
-					printf("%3lu: %5lu %lu\n",i,tmp_conflict_set.access_time[i],(uint64_t)tmp_conflict_set.cache_lines[i]);
-				}
-				getc(stdin);
-				///////////////////////////////////////////////////////////////
-
-				threshold= tmp_conflict_set.access_time[ (tmp_conflict_set.top-1)/4 ];
-
-				for(i=0;i<tmp_conflict_set.top;i++)
-				{
-					if(tmp_conflict_set.access_time[i] > threshold && tmp_conflict_set.access_time[i] < threshold + 20)
+					printf("%3lu    candidate num:%3d    ",i,tmp_candidate_head->top);
+					if(measure_candidate_time(threshold,tmp_candidate_head->cache_lines[i],&tmp_conflict_set)==-1)
 					{
-						threshold= tmp_conflict_set.access_time[i];
+						tmp_conflict_set.cache_lines[ tmp_conflict_set.top ] =tmp_candidate_head->cache_lines[i];
+						tmp_conflict_set.top++;
 					}
 				}
-				threshold=100;
-				///////////////////////////////////////////////////////////////
-				printf("threshold is %d\n",threshold);
+				printf("tmp_conflict_set top:%d\n",tmp_conflict_set.top);
 				getc(stdin);
-				///////////////////////////////////////////////////////////////
-
-				result_conflict_set.top=0;
-				for(i=0;i<tmp_conflict_set.top;i++)
+				
+				if(tmp_conflict_set.top==WAY*SLICE)
 				{
-					if(tmp_conflict_set.access_time[i] <= threshold)
-					{
-						result_conflict_set.cache_lines[i]=tmp_conflict_set.cache_lines[i];
-						result_conflict_set.top++;
-					}
-				}
-
-
-				///////////////////////////////////////////////////////////////
-				printf("colflict top is %d\n",result_conflict_set.top);
-				getc(stdin);
-				///////////////////////////////////////////////////////////////
-
-				if(result_conflict_set.top==WAY*SLICE)
-				{
-					for(i=0;i<result_conflict_set.top;i++)
-					{
-						printf("threshold:%d\n",threshold);
-						cache_line_to_cadidate(conflict_set,(uint64_t)result_conflict_set.cache_lines[i]);
-					}
+					printf("found conflict set!\n");
 					break;
 				}
 			}
