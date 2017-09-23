@@ -1,5 +1,9 @@
 # VM간 side channel attack을 통한 RSA 복호화 키 탈취
 
+소스를 계속 만들고 수정하고 있는데 생각날때마다 최적의 실험환경을 위해서 OS를 계속 다시 구축하다 보니 매번 github 2차 인증받기가 심히 귀찮다 소스는 의미있는 변화가 있을때만 커밋하자
+
+(환경구축의 편의성을 위해서 도커같은것도 생각을 해봤는데 OS체제 자체만으로도 캐시 탐지에 엄청난 잡음이 생기므로 도커를 올리면 실험 결과에 반드시 영향을 줄 것으로 예상되서 포기)
+
 ## covert channel
 1. shared memory 영역을 L3캐시 크기만큼 할당 (공유키는 아무값이나)
 2. shared memory 영역을 캐시 주소를 구성하는 tag,index,offset 값들을 shared memory 첫 주소에 더하며 캐시 전 영역에 접근(candidate set이라 부름.) 
