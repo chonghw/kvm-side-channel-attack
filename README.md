@@ -3,7 +3,7 @@
 ## covert channel
 1. shared memory 영역을 L3캐시 크기만큼 할당 (공유키는 아무값이나)
 2. shared memory 영역을 캐시 주소를 구성하는 tag,index,offset 값들을 shared memory 첫 주소에 더하며 캐시 전 영역에 접근(candidate set이라 부름.) 
->2-1. 접근예시) *(char*)((size_t)shm_addr+(tag<<17)+(index<<6)+offset).
+>2-1. 접근예시) \*(char\*)((size_t)shm_addr+(tag<<17)+(index<<6)+offset).
 
 >2-2. 이론대로라면 candidate set을 이용하여 conflict set을 만들어야 하지만 현재 시스템에서는 candidate set을 이용해 접근하는 것만으로도 상대 VM의 작업과정을 어느정도 감청가능함.
 
